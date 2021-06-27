@@ -1,2 +1,4 @@
 github.com/golang/glog v0.0.0-20210429001901-424d2337a529 h1:2voWjNECnrZRbfwXxHB1/j8wa6xdKn85B5NzgVL/pTU=
 github.com/golang/glog v0.0.0-20210429001901-424d2337a529/go.mod h1:SBH7ygxi8pfUlaOkMMuAQtPIUF8ecWP5IEl/CR7VP2Q=
+github.com/liyakai/behavior3go v0.0.0-20210627145825-93ab578714fe h1:/4jU6MpIJQKYXqMDTyzSfEL367NlNxjtwOI5jLdjdv4=
+github.com/liyakai/behavior3go v0.0.0-20210627145825-93ab578714fe/go.mod h1:f8o9RuuKpN6r78CEXjZtAQR+jQ9KWITi2YxNLJrgITg=
