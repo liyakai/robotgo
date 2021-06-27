@@ -1,0 +1,19 @@
+{
+  "global": {
+    "loglevel": "2",
+    "logstrlevel": "INFO",
+    "logtostderr": "false",
+    "alsologtostderr": "true",
+    "logdir": "log",
+    "config": "./bin/"
+  },
+  "robot": {
+    "robot_num": "10",
+    "tree": "TestLibrary",
+    "gateaddr":"127.0.0.1:9500",
+    "login_freq": "40",
+    "readtime" : "1000",
+    "big_byte_size": "1400",
+    "packetId": "packetid.txt"
+  }
+}

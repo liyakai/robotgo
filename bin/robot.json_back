@@ -1,0 +1,16 @@
+{
+  "global": {
+    "loglevel": "2",
+    "logstrlevel": "INFO",
+    "logtostderr": "true",
+    "alsologtostderr": "true",
+    "config": "./bin/"
+  },
+  "robot": {
+    "maxNum": "10",
+    "tree": "TestLibrary",
+    "gateaddr":"127.0.0.1:9500",
+    "freq": "40",
+    "readtime" : "1000"
+  }
+}
