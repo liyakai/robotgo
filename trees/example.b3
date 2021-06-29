@@ -1,0 +1,1348 @@
+{
+  "name": "example",
+  "description": "",
+  "data": {
+    "version": "0.3.0",
+    "scope": "project",
+    "selectedTree": "3d65a9c4-3dce-4585-8fc9-abfd02a567d0",
+    "trees": [
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "3d65a9c4-3dce-4585-8fc9-abfd02a567d0",
+        "title": "TesNetwork",
+        "description": "对网络库进行压测",
+        "root": "d34d7ae7-50af-4331-882a-481ca374c746",
+        "properties": {},
+        "nodes": {
+          "7cfd809a-9659-4962-8ef3-98761da9ed5c": {
+            "id": "7cfd809a-9659-4962-8ef3-98761da9ed5c",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 324,
+              "y": -2316
+            }
+          },
+          "59d623af-7f67-4ec7-beeb-ec0819f03259": {
+            "id": "59d623af-7f67-4ec7-beeb-ec0819f03259",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 372,
+              "y": -2268
+            }
+          },
+          "4392b720-947f-447d-ad9b-4f0192e90ca9": {
+            "id": "4392b720-947f-447d-ad9b-4f0192e90ca9",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 324,
+              "y": -2316
+            },
+            "child": "b33a1a17-8ccc-4d4c-a3b0-38c30979b580"
+          },
+          "b33a1a17-8ccc-4d4c-a3b0-38c30979b580": {
+            "id": "b33a1a17-8ccc-4d4c-a3b0-38c30979b580",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 528,
+              "y": -2316
+            },
+            "children": [
+              "3bba38a0-fe38-4d9e-9d16-d9676971f425"
+            ]
+          },
+          "3bba38a0-fe38-4d9e-9d16-d9676971f425": {
+            "id": "3bba38a0-fe38-4d9e-9d16-d9676971f425",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 732,
+              "y": -2376
+            }
+          },
+          "9b206686-5592-48dc-8b95-84f28bc1ba59": {
+            "id": "9b206686-5592-48dc-8b95-84f28bc1ba59",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 372,
+              "y": -2268
+            },
+            "child": "f3726400-dab1-4c39-9f7e-c5794f3de1c5"
+          },
+          "f3726400-dab1-4c39-9f7e-c5794f3de1c5": {
+            "id": "f3726400-dab1-4c39-9f7e-c5794f3de1c5",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 576,
+              "y": -2268
+            },
+            "children": [
+              "2549d54c-0d54-4bd8-ab5e-cdcc56312045"
+            ]
+          },
+          "2549d54c-0d54-4bd8-ab5e-cdcc56312045": {
+            "id": "2549d54c-0d54-4bd8-ab5e-cdcc56312045",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 780,
+              "y": -2328
+            }
+          },
+          "4573b670-ef4e-4219-8e60-dfb1dddb9838": {
+            "id": "4573b670-ef4e-4219-8e60-dfb1dddb9838",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 420,
+              "y": -2220
+            },
+            "child": "c7ad2f92-ce00-4e3f-83c7-c3903208e419"
+          },
+          "c7ad2f92-ce00-4e3f-83c7-c3903208e419": {
+            "id": "c7ad2f92-ce00-4e3f-83c7-c3903208e419",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 624,
+              "y": -2220
+            },
+            "children": [
+              "3a5ce67a-8b65-487c-8892-475de654fd85"
+            ]
+          },
+          "3a5ce67a-8b65-487c-8892-475de654fd85": {
+            "id": "3a5ce67a-8b65-487c-8892-475de654fd85",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 828,
+              "y": -2280
+            }
+          },
+          "9048a575-1c22-49fb-8bad-e217716b3953": {
+            "id": "9048a575-1c22-49fb-8bad-e217716b3953",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 468,
+              "y": -2172
+            },
+            "child": "96ed28c9-d1ae-43f2-9a77-4d3ea38c975c"
+          },
+          "96ed28c9-d1ae-43f2-9a77-4d3ea38c975c": {
+            "id": "96ed28c9-d1ae-43f2-9a77-4d3ea38c975c",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 672,
+              "y": -2172
+            },
+            "children": [
+              "07f5aadc-fc31-4f5a-8ba2-3eaa943b0b1d"
+            ]
+          },
+          "07f5aadc-fc31-4f5a-8ba2-3eaa943b0b1d": {
+            "id": "07f5aadc-fc31-4f5a-8ba2-3eaa943b0b1d",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 876,
+              "y": -2232
+            }
+          },
+          "ecdd8921-f586-4997-a7db-9e48bfc394fa": {
+            "id": "ecdd8921-f586-4997-a7db-9e48bfc394fa",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 324,
+              "y": -2316
+            },
+            "child": "c423c3c9-1747-49f6-8e2e-e200e2c6a668"
+          },
+          "c423c3c9-1747-49f6-8e2e-e200e2c6a668": {
+            "id": "c423c3c9-1747-49f6-8e2e-e200e2c6a668",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 528,
+              "y": -2316
+            },
+            "children": [
+              "2effcd65-5898-4105-872b-55a42721d246"
+            ]
+          },
+          "2effcd65-5898-4105-872b-55a42721d246": {
+            "id": "2effcd65-5898-4105-872b-55a42721d246",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 732,
+              "y": -2376
+            }
+          },
+          "0ba726f0-5b09-47a2-94e8-4a1b42b99dcd": {
+            "id": "0ba726f0-5b09-47a2-94e8-4a1b42b99dcd",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 324,
+              "y": -2316
+            },
+            "child": "1c243122-4ec9-4c4e-a15a-4718c7e0c1dc"
+          },
+          "1c243122-4ec9-4c4e-a15a-4718c7e0c1dc": {
+            "id": "1c243122-4ec9-4c4e-a15a-4718c7e0c1dc",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 528,
+              "y": -2316
+            },
+            "children": [
+              "204591fe-5a9b-4242-ae21-107066dacc87"
+            ]
+          },
+          "204591fe-5a9b-4242-ae21-107066dacc87": {
+            "id": "204591fe-5a9b-4242-ae21-107066dacc87",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 732,
+              "y": -2376
+            }
+          },
+          "b5ea51f2-dd33-4f84-a5ea-e9d9c719ca46": {
+            "id": "b5ea51f2-dd33-4f84-a5ea-e9d9c719ca46",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": -264,
+              "y": -2556
+            },
+            "child": "da8d683f-1470-4352-8279-62981b098cc8"
+          },
+          "da8d683f-1470-4352-8279-62981b098cc8": {
+            "id": "da8d683f-1470-4352-8279-62981b098cc8",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": -2556
+            },
+            "children": [
+              "4c0a5b27-2575-43ca-ad06-60cb1dfacb27"
+            ]
+          },
+          "4c0a5b27-2575-43ca-ad06-60cb1dfacb27": {
+            "id": "4c0a5b27-2575-43ca-ad06-60cb1dfacb27",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 144,
+              "y": -2616
+            }
+          },
+          "d17f476a-17d5-4dc6-b029-783692927a7d": {
+            "id": "d17f476a-17d5-4dc6-b029-783692927a7d",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": -216,
+              "y": -2508
+            },
+            "child": "62f2a608-00e1-4c02-a001-12cf53675135"
+          },
+          "62f2a608-00e1-4c02-a001-12cf53675135": {
+            "id": "62f2a608-00e1-4c02-a001-12cf53675135",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -12,
+              "y": -2508
+            },
+            "children": [
+              "42e6cdd1-894d-4a95-89b4-0296947be031"
+            ]
+          },
+          "42e6cdd1-894d-4a95-89b4-0296947be031": {
+            "id": "42e6cdd1-894d-4a95-89b4-0296947be031",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 192,
+              "y": -2568
+            }
+          },
+          "d34d7ae7-50af-4331-882a-481ca374c746": {
+            "id": "d34d7ae7-50af-4331-882a-481ca374c746",
+            "name": "MemPriority",
+            "category": "composite",
+            "title": "MemPriority",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 204,
+              "y": 0
+            },
+            "children": [
+              "0dbf1c5e-036a-4c74-8935-68e2a1f3e3a5",
+              "925a366d-5ad3-4f6b-8f9e-031fd287b70c",
+              "27af0ed2-ca8d-4d0d-8128-2039f6b5e632"
+            ]
+          },
+          "60d0b739-84ae-42dc-99dd-5d041037e93d": {
+            "id": "60d0b739-84ae-42dc-99dd-5d041037e93d",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": -168,
+              "y": -2460
+            },
+            "child": "a2b18f17-f687-4bda-8399-d13acb944f80"
+          },
+          "a2b18f17-f687-4bda-8399-d13acb944f80": {
+            "id": "a2b18f17-f687-4bda-8399-d13acb944f80",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 36,
+              "y": -2460
+            },
+            "children": [
+              "0a335ac5-bf10-4c15-8892-7d4a8bfd21d8"
+            ]
+          },
+          "0a335ac5-bf10-4c15-8892-7d4a8bfd21d8": {
+            "id": "0a335ac5-bf10-4c15-8892-7d4a8bfd21d8",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 240,
+              "y": -2520
+            }
+          },
+          "43af95df-d2c5-4eaa-8d09-01181695100a": {
+            "id": "43af95df-d2c5-4eaa-8d09-01181695100a",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 372,
+              "y": -2268
+            },
+            "child": "a62a2bf5-a57d-4fd2-9220-c4abb285b420"
+          },
+          "a62a2bf5-a57d-4fd2-9220-c4abb285b420": {
+            "id": "a62a2bf5-a57d-4fd2-9220-c4abb285b420",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 576,
+              "y": -2268
+            },
+            "children": [
+              "bd61b89c-d4c3-48bc-9b1a-9a9d16bf61ff"
+            ]
+          },
+          "bd61b89c-d4c3-48bc-9b1a-9a9d16bf61ff": {
+            "id": "bd61b89c-d4c3-48bc-9b1a-9a9d16bf61ff",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 780,
+              "y": -2328
+            }
+          },
+          "0226562f-069b-4c75-9558-6612b0cd38c8": {
+            "id": "0226562f-069b-4c75-9558-6612b0cd38c8",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 420,
+              "y": -2220
+            },
+            "child": "6a3bc53c-63e1-4840-81f3-2b71180b72f0"
+          },
+          "6a3bc53c-63e1-4840-81f3-2b71180b72f0": {
+            "id": "6a3bc53c-63e1-4840-81f3-2b71180b72f0",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 624,
+              "y": -2220
+            },
+            "children": [
+              "91fda67d-e914-477d-9fe3-c9c7eb4c6d8b"
+            ]
+          },
+          "91fda67d-e914-477d-9fe3-c9c7eb4c6d8b": {
+            "id": "91fda67d-e914-477d-9fe3-c9c7eb4c6d8b",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 828,
+              "y": -2280
+            }
+          },
+          "842c550f-32eb-4a52-9f8f-39ccfd61cf83": {
+            "id": "842c550f-32eb-4a52-9f8f-39ccfd61cf83",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 324,
+              "y": -2316
+            },
+            "child": "de4a9143-8330-4b45-804a-9f9408b70a3a"
+          },
+          "de4a9143-8330-4b45-804a-9f9408b70a3a": {
+            "id": "de4a9143-8330-4b45-804a-9f9408b70a3a",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 528,
+              "y": -2316
+            },
+            "children": [
+              "e410e31e-71f3-4edc-8fe1-aab1c241170a"
+            ]
+          },
+          "e410e31e-71f3-4edc-8fe1-aab1c241170a": {
+            "id": "e410e31e-71f3-4edc-8fe1-aab1c241170a",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 732,
+              "y": -2376
+            }
+          },
+          "625fea15-30bd-414c-8663-f5d3abf61ba5": {
+            "id": "625fea15-30bd-414c-8663-f5d3abf61ba5",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 372,
+              "y": -2268
+            },
+            "child": "4b6ef0ad-dfef-4c90-8680-a41408cdedbb"
+          },
+          "4b6ef0ad-dfef-4c90-8680-a41408cdedbb": {
+            "id": "4b6ef0ad-dfef-4c90-8680-a41408cdedbb",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 576,
+              "y": -2268
+            },
+            "children": [
+              "70b57e51-3145-4366-99f8-6657c67abc01"
+            ]
+          },
+          "70b57e51-3145-4366-99f8-6657c67abc01": {
+            "id": "70b57e51-3145-4366-99f8-6657c67abc01",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 780,
+              "y": -2328
+            }
+          },
+          "44ca92a4-decf-4740-8101-988245165d82": {
+            "id": "44ca92a4-decf-4740-8101-988245165d82",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 420,
+              "y": -2220
+            },
+            "child": "dda48cba-4a4e-43c7-80cf-d6d9c0a880b2"
+          },
+          "dda48cba-4a4e-43c7-80cf-d6d9c0a880b2": {
+            "id": "dda48cba-4a4e-43c7-80cf-d6d9c0a880b2",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 624,
+              "y": -2220
+            },
+            "children": [
+              "65ac6550-1cd9-4084-90ab-0589d437222a"
+            ]
+          },
+          "65ac6550-1cd9-4084-90ab-0589d437222a": {
+            "id": "65ac6550-1cd9-4084-90ab-0589d437222a",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 828,
+              "y": -2280
+            }
+          },
+          "df9a58be-1263-4bc2-81dc-b88dd2f2abd5": {
+            "id": "df9a58be-1263-4bc2-81dc-b88dd2f2abd5",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 468,
+              "y": -2172
+            },
+            "child": "e4bd6b29-32c4-4b9e-8418-ab7a27b63b3e"
+          },
+          "e4bd6b29-32c4-4b9e-8418-ab7a27b63b3e": {
+            "id": "e4bd6b29-32c4-4b9e-8418-ab7a27b63b3e",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 672,
+              "y": -2172
+            },
+            "children": [
+              "5b165ac9-bd63-458e-b317-c433d36ec90c"
+            ]
+          },
+          "5b165ac9-bd63-458e-b317-c433d36ec90c": {
+            "id": "5b165ac9-bd63-458e-b317-c433d36ec90c",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 876,
+              "y": -2232
+            }
+          },
+          "0dbf1c5e-036a-4c74-8935-68e2a1f3e3a5": {
+            "id": "0dbf1c5e-036a-4c74-8935-68e2a1f3e3a5",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 408,
+              "y": -180
+            },
+            "children": [
+              "2ce4fcee-014a-4aed-85a9-2d7d568cd894",
+              "86d93e32-9739-4d42-8773-689609ce1bac"
+            ]
+          },
+          "c2871f7d-eb6c-4958-8108-0c00b3468114": {
+            "id": "c2871f7d-eb6c-4958-8108-0c00b3468114",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 516,
+              "y": -2124
+            },
+            "child": "cbb99f0f-9955-481e-8c3a-0ae531c4d2de"
+          },
+          "cbb99f0f-9955-481e-8c3a-0ae531c4d2de": {
+            "id": "cbb99f0f-9955-481e-8c3a-0ae531c4d2de",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 720,
+              "y": -2124
+            },
+            "children": [
+              "8cec2517-9f01-4078-9641-3acc96e83fc3"
+            ]
+          },
+          "8cec2517-9f01-4078-9641-3acc96e83fc3": {
+            "id": "8cec2517-9f01-4078-9641-3acc96e83fc3",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 924,
+              "y": -2184
+            }
+          },
+          "fc23d696-2c8c-4a2e-954b-1ab15499346f": {
+            "id": "fc23d696-2c8c-4a2e-954b-1ab15499346f",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 576,
+              "y": -2064
+            },
+            "child": "7a222c87-c7b0-499b-8abf-4ce88e902817"
+          },
+          "7a222c87-c7b0-499b-8abf-4ce88e902817": {
+            "id": "7a222c87-c7b0-499b-8abf-4ce88e902817",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 780,
+              "y": -2064
+            },
+            "children": [
+              "7eb6f245-e1fd-4596-b0e5-4f416b2ce09c"
+            ]
+          },
+          "7eb6f245-e1fd-4596-b0e5-4f416b2ce09c": {
+            "id": "7eb6f245-e1fd-4596-b0e5-4f416b2ce09c",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 984,
+              "y": -2124
+            }
+          },
+          "47a23e57-7e1b-41bb-8d8d-c5537d05f7c2": {
+            "id": "47a23e57-7e1b-41bb-8d8d-c5537d05f7c2",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 324,
+              "y": -2316
+            },
+            "child": "55c3d837-85e8-4a11-8bdb-3ea73976ed5d"
+          },
+          "55c3d837-85e8-4a11-8bdb-3ea73976ed5d": {
+            "id": "55c3d837-85e8-4a11-8bdb-3ea73976ed5d",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 528,
+              "y": -2316
+            },
+            "children": [
+              "12514109-0ca1-4a7c-b534-362fc641da6b"
+            ]
+          },
+          "12514109-0ca1-4a7c-b534-362fc641da6b": {
+            "id": "12514109-0ca1-4a7c-b534-362fc641da6b",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 732,
+              "y": -2376
+            }
+          },
+          "daf60997-2973-40b7-9386-a72c940d750a": {
+            "id": "daf60997-2973-40b7-9386-a72c940d750a",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 576,
+              "y": -2268
+            },
+            "children": [
+              "83c9c27b-0fc2-4ecb-ae34-9a9514f11028"
+            ]
+          },
+          "56c368f7-4e9b-45ab-a292-b3799897c462": {
+            "id": "56c368f7-4e9b-45ab-a292-b3799897c462",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 372,
+              "y": -2268
+            },
+            "child": "daf60997-2973-40b7-9386-a72c940d750a"
+          },
+          "83c9c27b-0fc2-4ecb-ae34-9a9514f11028": {
+            "id": "83c9c27b-0fc2-4ecb-ae34-9a9514f11028",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 780,
+              "y": -2328
+            }
+          },
+          "2ce4fcee-014a-4aed-85a9-2d7d568cd894": {
+            "id": "2ce4fcee-014a-4aed-85a9-2d7d568cd894",
+            "name": "IsConnectGate",
+            "category": "decorator",
+            "title": "IsConnectGate",
+            "description": "IsConnectGate",
+            "properties": {},
+            "display": {
+              "x": 624,
+              "y": -264
+            },
+            "child": "f4024a5c-669b-491b-b801-3d219d3b8140"
+          },
+          "6fde022d-b201-4233-8027-30f54c11cd87": {
+            "id": "6fde022d-b201-4233-8027-30f54c11cd87",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 528,
+              "y": -2316
+            },
+            "children": [
+              "e331d241-6b2b-461c-bf82-9048fc8ad979"
+            ]
+          },
+          "e331d241-6b2b-461c-bf82-9048fc8ad979": {
+            "id": "e331d241-6b2b-461c-bf82-9048fc8ad979",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 732,
+              "y": -2376
+            }
+          },
+          "0122bf69-82ed-441c-8704-4b51a6dd3ebe": {
+            "id": "0122bf69-82ed-441c-8704-4b51a6dd3ebe",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 576,
+              "y": -2268
+            },
+            "children": [
+              "1d426d56-629b-4577-8a4d-49f9d177b994"
+            ]
+          },
+          "1d426d56-629b-4577-8a4d-49f9d177b994": {
+            "id": "1d426d56-629b-4577-8a4d-49f9d177b994",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 780,
+              "y": -2328
+            }
+          },
+          "9839dbed-5338-4554-92e7-53bff53441a9": {
+            "id": "9839dbed-5338-4554-92e7-53bff53441a9",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 732,
+              "y": -2376
+            }
+          },
+          "eb2582bc-acb0-4e9d-9c9f-e3c28242e2dd": {
+            "id": "eb2582bc-acb0-4e9d-9c9f-e3c28242e2dd",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 528,
+              "y": -2316
+            },
+            "children": [
+              "9839dbed-5338-4554-92e7-53bff53441a9"
+            ]
+          },
+          "4279446a-a2bc-4898-8f43-e347781191c4": {
+            "id": "4279446a-a2bc-4898-8f43-e347781191c4",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 780,
+              "y": -2328
+            }
+          },
+          "1b9c809b-5f79-48e9-81b0-554f56cff0b5": {
+            "id": "1b9c809b-5f79-48e9-81b0-554f56cff0b5",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 576,
+              "y": -2268
+            },
+            "children": [
+              "4279446a-a2bc-4898-8f43-e347781191c4"
+            ]
+          },
+          "f850d346-18cc-4a1a-9365-526533ed037f": {
+            "id": "f850d346-18cc-4a1a-9365-526533ed037f",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "10.2.1.203:9500"
+            },
+            "display": {
+              "x": 828,
+              "y": -2280
+            }
+          },
+          "3cc1a12b-b3fd-43ff-8654-4373489f8dff": {
+            "id": "3cc1a12b-b3fd-43ff-8654-4373489f8dff",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 624,
+              "y": -2220
+            },
+            "children": [
+              "f850d346-18cc-4a1a-9365-526533ed037f"
+            ]
+          },
+          "f4024a5c-669b-491b-b801-3d219d3b8140": {
+            "id": "f4024a5c-669b-491b-b801-3d219d3b8140",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 828,
+              "y": -264
+            },
+            "children": [
+              "be965352-0176-4653-b271-cd58c1a99509"
+            ]
+          },
+          "8607fa84-f009-45ba-aa13-e4b2bf806eeb": {
+            "id": "8607fa84-f009-45ba-aa13-e4b2bf806eeb",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "172.17.0.11:9500"
+            },
+            "display": {
+              "x": 1248,
+              "y": -312
+            }
+          },
+          "1f8ca058-9f90-4fed-b537-7df473036989": {
+            "id": "1f8ca058-9f90-4fed-b537-7df473036989",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 108,
+              "y": 936
+            },
+            "children": [
+              "35ed3536-6ba7-4c03-8778-79b29d32713b",
+              "f8cabeeb-c6e4-43ac-84f6-a29fa9baa045",
+              "5b51b1f6-21f3-41f7-b2c8-245133057904"
+            ]
+          },
+          "35ed3536-6ba7-4c03-8778-79b29d32713b": {
+            "id": "35ed3536-6ba7-4c03-8778-79b29d32713b",
+            "name": "Log",
+            "category": "action",
+            "title": "Log",
+            "description": "Log",
+            "properties": {
+              "info": "\"我要断开连接了\""
+            },
+            "display": {
+              "x": 324,
+              "y": 804
+            }
+          },
+          "f8cabeeb-c6e4-43ac-84f6-a29fa9baa045": {
+            "id": "f8cabeeb-c6e4-43ac-84f6-a29fa9baa045",
+            "name": "SleepMS",
+            "category": "action",
+            "title": "SleepMS",
+            "description": "SleepMS的单位是100ms\nsleep时间在sleepbase与sleeptop之间随机",
+            "properties": {
+              "sleepbase": 10,
+              "sleeptop": 20
+            },
+            "display": {
+              "x": 324,
+              "y": 864
+            }
+          },
+          "5b51b1f6-21f3-41f7-b2c8-245133057904": {
+            "id": "5b51b1f6-21f3-41f7-b2c8-245133057904",
+            "name": "DisConnectServer",
+            "category": "action",
+            "title": "DisConnectServer",
+            "description": "DisConnectServer",
+            "properties": {},
+            "display": {
+              "x": 324,
+              "y": 1068
+            }
+          },
+          "925a366d-5ad3-4f6b-8f9e-031fd287b70c": {
+            "id": "925a366d-5ad3-4f6b-8f9e-031fd287b70c",
+            "name": "Log",
+            "category": "action",
+            "title": "Log",
+            "description": "Log",
+            "properties": {
+              "info": "断开连接了"
+            },
+            "display": {
+              "x": 408,
+              "y": 36
+            }
+          },
+          "27af0ed2-ca8d-4d0d-8128-2039f6b5e632": {
+            "id": "27af0ed2-ca8d-4d0d-8128-2039f6b5e632",
+            "name": "DisConnectServer",
+            "category": "action",
+            "title": "DisConnectServer",
+            "description": "DisConnectServer",
+            "properties": {},
+            "display": {
+              "x": 408,
+              "y": 132
+            }
+          },
+          "640eefe7-8194-4e65-8f22-5f6ebf67f631": {
+            "id": "640eefe7-8194-4e65-8f22-5f6ebf67f631",
+            "name": "SendBigByte",
+            "category": "action",
+            "title": "SendBigByte",
+            "description": "SendBigByte",
+            "properties": {},
+            "display": {
+              "x": 828,
+              "y": -132
+            }
+          },
+          "d4a2e4d5-76e0-4659-80a9-f6d721f0c0cc": {
+            "id": "d4a2e4d5-76e0-4659-80a9-f6d721f0c0cc",
+            "name": "SendBigByteRes",
+            "category": "action",
+            "title": "SendBigByteRes",
+            "description": "SendBigByteRes",
+            "properties": {},
+            "display": {
+              "x": 828,
+              "y": -48
+            }
+          },
+          "86d93e32-9739-4d42-8773-689609ce1bac": {
+            "id": "86d93e32-9739-4d42-8773-689609ce1bac",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 624,
+              "y": -96
+            },
+            "children": [
+              "640eefe7-8194-4e65-8f22-5f6ebf67f631",
+              "d4a2e4d5-76e0-4659-80a9-f6d721f0c0cc"
+            ]
+          },
+          "cf9698ac-098e-408e-8258-2916618a16fc": {
+            "id": "cf9698ac-098e-408e-8258-2916618a16fc",
+            "name": "ConnectServer",
+            "category": "action",
+            "title": "ConnectServer",
+            "description": "ConnectServer",
+            "properties": {
+              "gateaddr": "172.17.0.11:9501"
+            },
+            "display": {
+              "x": 1248,
+              "y": -240
+            }
+          },
+          "be965352-0176-4653-b271-cd58c1a99509": {
+            "id": "be965352-0176-4653-b271-cd58c1a99509",
+            "name": "RandomChooseOne",
+            "category": "composite",
+            "title": "RandomChooseOne",
+            "description": "RandomChooseOne",
+            "properties": {},
+            "display": {
+              "x": 1032,
+              "y": -264
+            },
+            "children": [
+              "8607fa84-f009-45ba-aa13-e4b2bf806eeb",
+              "cf9698ac-098e-408e-8258-2916618a16fc"
+            ]
+          }
+        },
+        "display": {
+          "camera_x": 477,
+          "camera_y": 566.5,
+          "camera_z": 0.75,
+          "x": 0,
+          "y": 0
+        }
+      }
+    ],
+    "custom_nodes": [
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "Log",
+        "category": "action",
+        "title": "Log",
+        "description": "Log",
+        "properties": {
+          "info": "log..."
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "IfHaveCharacter",
+        "category": "decorator",
+        "title": "IfHaveCharacter",
+        "description": "IfHaveCharacter",
+        "properties": {},
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "DisConnectServer",
+        "category": "action",
+        "title": "DisConnectServer",
+        "description": "DisConnectServer",
+        "properties": {},
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "ConnectServer",
+        "category": "action",
+        "title": "ConnectServer",
+        "description": "ConnectServer",
+        "properties": {
+          "gateaddr": "10.0.22.161:9500"
+        },
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "IsOnline",
+        "category": "decorator",
+        "title": "IsOnline",
+        "description": "IsOnline",
+        "properties": {},
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "IsConnectGate",
+        "category": "decorator",
+        "title": "IsConnectGate",
+        "description": "IsConnectGate",
+        "properties": {},
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "SleepMS",
+        "category": "action",
+        "title": "SleepMS",
+        "description": "SleepMS的单位是100ms\nsleep时间在sleepbase与sleeptop之间随机",
+        "properties": {
+          "sleepbase": 10,
+          "sleeptop": 20
+        },
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "RandomChooseOne",
+        "category": "composite",
+        "title": "RandomChooseOne",
+        "description": "RandomChooseOne",
+        "properties": {},
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "RandomExe",
+        "category": "composite",
+        "title": "RandomExe",
+        "description": "RandomExe随机根据属性配置随机决定是否执行子节点\n概率表示的分母为配置值“denominator”,分子为配置值\"probability\"",
+        "properties": {
+          "probability": 1000,
+          "denominator": 10000
+        },
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "SendBigByte",
+        "category": "action",
+        "title": "SendBigByte",
+        "description": "SendBigByte",
+        "properties": {},
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "SendBigByteRes",
+        "category": "action",
+        "title": "SendBigByteRes",
+        "description": "SendBigByteRes",
+        "properties": {},
+        "parent": null
+      }
+    ],
+    "custom_folders": []
+  },
+  "path": "E:\\workSpace\\github\\robotgo\\trees\\example.b3"
+}

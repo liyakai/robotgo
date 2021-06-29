@@ -1,4 +1,4 @@
-package main
+package robot
 
 import (
 	"fmt"
@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/golang/glog"
-	b3 "github.com/liyakai/behavior3go"
 	. "github.com/liyakai/behavior3go/config"
 	. "github.com/liyakai/behavior3go/core"
 	. "github.com/liyakai/behavior3go/loader"
@@ -19,7 +18,8 @@ type robotCmd struct {
 	data []byte
 }
 
-type robot struct {
+type Robot struct {
+	network *RNetwork
 	id      uint64
 	uuid    string
 	pass    string
@@ -32,16 +32,18 @@ type robot struct {
 	name    string
 }
 
-func newRobot(index uint32) *robot {
-	rbt := &robot{
-		uuid: getRandStr(index, 0),
-		pass: "123456",
+func newRobot(index uint32) *Robot {
+	rbt := &Robot{
+		uuid:    getRandStr(index, 0),
+		pass:    "123456",
+		network: NewNetWork(),
 	}
+	rbt.network.SetOwner(rbt)
 	rbt.online = true
 	rbt.zoneid = 1
 	rbt.job = 1
 	rbt.gender = 1
-	rbt.name = rbt.uuid //getRandStr(index,2)
+	rbt.name = rbt.uuid
 	glog.Infoln("初始化机器人：", rbt.uuid)
 
 	go rbt.RunAITree()
@@ -57,31 +59,18 @@ func getRandStr(index uint32, lenght int) string {
 	for i := 0; i < lenght; i++ {
 		retStr += data[rand.Intn(len(data))]
 	}
-	fmt.Println(retStr)
-	//time.Sleep(time.Second*100)
 	return retStr
 }
 
-func (rbt *robot) RunAITree() {
-	projectConfig, ok := LoadRawProjectCfg("example.b3")
+func (rbt *Robot) RunAITree() {
+	projectConfig, ok := LoadRawProjectCfg(tools.EnvGet("robot", "tree_file"))
 	if !ok {
 		fmt.Println("LoadRawProjectCfg err")
 		return
 	}
 
 	//自定义节点注册
-	maps := b3.NewRegisterStructMaps()
-	// maps.Register("Log", new(NodeLog))
-	// maps.Register("Connected", new(Connected))
-	// maps.Register("ConnectedRes", new(ConnectedRes))
-	// maps.Register("ConnectServer", new(ConnectServer))
-	// maps.Register("DisConnectServer", new(DisConnectServer))
-	// maps.Register("SleepMS", new(SleepMS))
-	// maps.Register("IsConnectGate", new(IsConnectGate))
-	// maps.Register("RandomChooseOne", new(RandomChooseOne))
-	// maps.Register("RandomExe", new(RandomExe))
-	// maps.Register("SendBigByte", new(SendBigBytePb))
-	// maps.Register("SendBigByteRes", new(SendBigBytePbRes))
+	maps := RegisterNodes()
 
 	var firstTree *BehaviorTree
 	//载入
@@ -95,13 +84,8 @@ func (rbt *robot) RunAITree() {
 	}
 
 	//输入板
-	board := NewBlackboard()
+	board := RegisterBlackBoard()
 	board.SetMem("robot", rbt)
-	board.SetMem("is_connect_gate", false) // 设置为不在线
-	big_byte_size, _ := strconv.Atoi(tools.EnvGet("robot", "big_byte_size"))
-	board.SetMem("big_byte_size", int32(big_byte_size))
-	board.SetMem("test_pkt_size", int32(big_byte_size))
-
 	//循环每一帧
 	for i := 0; i < 30000000; i++ {
 		firstTree.Tick(i, board)

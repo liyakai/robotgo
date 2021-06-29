@@ -9,7 +9,8 @@
   },
   "robot": {
     "robot_num": "10",
-    "tree": "TestLibrary",
+    "tree_file":"../trees/example.b3",
+    "tree": "TesNetwork",
     "gateaddr":"127.0.0.1:9500",
     "login_freq": "40",
     "readtime" : "1000",

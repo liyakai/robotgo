@@ -1,4 +1,4 @@
-package main
+package robot
 
 import (
 	"sync"
@@ -6,7 +6,7 @@ import (
 )
 
 type robotMgr struct {
-	robots      map[string]*robot
+	robots      map[string]*Robot
 	mutex       sync.RWMutex
 	maxRobotNum uint32
 	freq        int64
@@ -19,19 +19,19 @@ var robMgr *robotMgr
 func RobotMgrGetMe() *robotMgr {
 	if robMgr == nil {
 		robMgr = &robotMgr{
-			robots: make(map[string]*robot),
+			robots: make(map[string]*Robot),
 		}
 	}
 	return robMgr
 }
 
-func (robm *robotMgr) init(maxRobotNum uint32, freq int64) {
+func (robm *robotMgr) Init(maxRobotNum uint32, freq int64) {
 	robm.maxRobotNum = maxRobotNum
 	robm.freq = freq
 	go robm.timeAction()
 }
 
-func (robm *robotMgr) createRobot(index uint32) {
+func (robm *robotMgr) CreateRobot(index uint32) {
 	robm.mutex.Lock()
 	defer robm.mutex.Unlock()
 	rob := newRobot(index)
@@ -45,13 +45,13 @@ func (robm *robotMgr) timeAction() {
 		select {
 		case <-createTick.C:
 			if robm.robotNum < robm.maxRobotNum {
-				robm.createRobot(robm.robotNum)
+				robm.CreateRobot(robm.robotNum)
 				robm.robotNum++
 			}
 		}
 	}
 }
 
-func (robm *robotMgr) isFinish() bool {
+func (robm *robotMgr) IsFinish() bool {
 	return robm.finish
 }

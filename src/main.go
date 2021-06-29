@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"math/rand"
+	. "robotgo/src/robot"
 	"robotgo/src/tools"
 	"runtime"
 	"runtime/debug"
@@ -31,10 +32,10 @@ func main() {
 	robot_num, login_req := ConfigParam()
 	glog.Info("[启动] 开始机器人测试")
 
-	RobotMgrGetMe().init(uint32(robot_num), int64(login_req))
+	RobotMgrGetMe().Init(uint32(robot_num), int64(login_req))
 	glog.Info("[启动] 完成 ")
 	for {
-		if RobotMgrGetMe().isFinish() {
+		if RobotMgrGetMe().IsFinish() {
 			return
 		}
 
