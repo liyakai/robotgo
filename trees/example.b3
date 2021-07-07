@@ -12,7 +12,7 @@
         "id": "3d65a9c4-3dce-4585-8fc9-abfd02a567d0",
         "title": "TesNetwork",
         "description": "对网络库进行压测",
-        "root": "d34d7ae7-50af-4331-882a-481ca374c746",
+        "root": "f9af93af-b6f2-4ca3-bd8d-a3f26eb6d729",
         "properties": {},
         "nodes": {
           "7cfd809a-9659-4962-8ef3-98761da9ed5c": {
@@ -375,23 +375,6 @@
               "y": -2568
             }
           },
-          "d34d7ae7-50af-4331-882a-481ca374c746": {
-            "id": "d34d7ae7-50af-4331-882a-481ca374c746",
-            "name": "MemPriority",
-            "category": "composite",
-            "title": "MemPriority",
-            "description": "",
-            "properties": {},
-            "display": {
-              "x": 204,
-              "y": 0
-            },
-            "children": [
-              "0dbf1c5e-036a-4c74-8935-68e2a1f3e3a5",
-              "925a366d-5ad3-4f6b-8f9e-031fd287b70c",
-              "27af0ed2-ca8d-4d0d-8128-2039f6b5e632"
-            ]
-          },
           "60d0b739-84ae-42dc-99dd-5d041037e93d": {
             "id": "60d0b739-84ae-42dc-99dd-5d041037e93d",
             "name": "IsConnectGate",
@@ -695,11 +678,14 @@
             "properties": {},
             "display": {
               "x": 408,
-              "y": -180
+              "y": -204
             },
             "children": [
               "2ce4fcee-014a-4aed-85a9-2d7d568cd894",
-              "86d93e32-9739-4d42-8773-689609ce1bac"
+              "d4dd61ff-7348-4749-8103-0e0692cf9a32",
+              "86d93e32-9739-4d42-8773-689609ce1bac",
+              "1db7c07d-874e-4779-be9d-6a5ee2db5591",
+              "c00c9aa3-8496-46fe-b147-bb7eef2e18f8"
             ]
           },
           "c2871f7d-eb6c-4958-8108-0c00b3468114": {
@@ -879,7 +865,7 @@
             "properties": {},
             "display": {
               "x": 624,
-              "y": -264
+              "y": -468
             },
             "child": "f4024a5c-669b-491b-b801-3d219d3b8140"
           },
@@ -1037,7 +1023,7 @@
             "properties": {},
             "display": {
               "x": 828,
-              "y": -264
+              "y": -468
             },
             "children": [
               "be965352-0176-4653-b271-cd58c1a99509"
@@ -1054,7 +1040,7 @@
             },
             "display": {
               "x": 1248,
-              "y": -312
+              "y": -504
             }
           },
           "1f8ca058-9f90-4fed-b537-7df473036989": {
@@ -1122,11 +1108,11 @@
             "title": "Log",
             "description": "Log",
             "properties": {
-              "info": "断开连接了"
+              "info": "我要断开连接了"
             },
             "display": {
-              "x": 408,
-              "y": 36
+              "x": 624,
+              "y": 108
             }
           },
           "27af0ed2-ca8d-4d0d-8128-2039f6b5e632": {
@@ -1137,8 +1123,8 @@
             "description": "DisConnectServer",
             "properties": {},
             "display": {
-              "x": 408,
-              "y": 132
+              "x": 624,
+              "y": 192
             }
           },
           "640eefe7-8194-4e65-8f22-5f6ebf67f631": {
@@ -1150,7 +1136,7 @@
             "properties": {},
             "display": {
               "x": 828,
-              "y": -132
+              "y": -240
             }
           },
           "d4a2e4d5-76e0-4659-80a9-f6d721f0c0cc": {
@@ -1162,7 +1148,7 @@
             "properties": {},
             "display": {
               "x": 828,
-              "y": -48
+              "y": -156
             }
           },
           "86d93e32-9739-4d42-8773-689609ce1bac": {
@@ -1174,7 +1160,7 @@
             "properties": {},
             "display": {
               "x": 624,
-              "y": -96
+              "y": -204
             },
             "children": [
               "640eefe7-8194-4e65-8f22-5f6ebf67f631",
@@ -1192,7 +1178,7 @@
             },
             "display": {
               "x": 1248,
-              "y": -240
+              "y": -420
             }
           },
           "be965352-0176-4653-b271-cd58c1a99509": {
@@ -1204,12 +1190,103 @@
             "properties": {},
             "display": {
               "x": 1032,
-              "y": -264
+              "y": -468
             },
             "children": [
               "8607fa84-f009-45ba-aa13-e4b2bf806eeb",
               "cf9698ac-098e-408e-8258-2916618a16fc"
             ]
+          },
+          "4dd711e1-1b71-49bf-b5ab-ef5a8d771672": {
+            "id": "4dd711e1-1b71-49bf-b5ab-ef5a8d771672",
+            "name": "SleepMS",
+            "category": "action",
+            "title": "SleepMS",
+            "description": "SleepMS的单位是100ms\nsleep时间在sleepbase与sleeptop之间随机",
+            "properties": {
+              "sleepbase": 20,
+              "sleeptop": 30
+            },
+            "display": {
+              "x": 624,
+              "y": 288
+            }
+          },
+          "d4dd61ff-7348-4749-8103-0e0692cf9a32": {
+            "id": "d4dd61ff-7348-4749-8103-0e0692cf9a32",
+            "name": "Log",
+            "category": "action",
+            "title": "Log",
+            "description": "Log",
+            "properties": {
+              "info": "准备发送测试块"
+            },
+            "display": {
+              "x": 624,
+              "y": -336
+            }
+          },
+          "c00c9aa3-8496-46fe-b147-bb7eef2e18f8": {
+            "id": "c00c9aa3-8496-46fe-b147-bb7eef2e18f8",
+            "name": "Log",
+            "category": "action",
+            "title": "Log",
+            "description": "Log",
+            "properties": {
+              "info": "发送测试块结束"
+            },
+            "display": {
+              "x": 624,
+              "y": 24
+            }
+          },
+          "99f27029-3b27-4536-82c8-da390d99af00": {
+            "id": "99f27029-3b27-4536-82c8-da390d99af00",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 408,
+              "y": 192
+            },
+            "children": [
+              "925a366d-5ad3-4f6b-8f9e-031fd287b70c",
+              "27af0ed2-ca8d-4d0d-8128-2039f6b5e632",
+              "4dd711e1-1b71-49bf-b5ab-ef5a8d771672"
+            ]
+          },
+          "f9af93af-b6f2-4ca3-bd8d-a3f26eb6d729": {
+            "id": "f9af93af-b6f2-4ca3-bd8d-a3f26eb6d729",
+            "name": "MemPriority",
+            "category": "composite",
+            "title": "MemPriority",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 204,
+              "y": 0
+            },
+            "children": [
+              "0dbf1c5e-036a-4c74-8935-68e2a1f3e3a5",
+              "99f27029-3b27-4536-82c8-da390d99af00"
+            ]
+          },
+          "1db7c07d-874e-4779-be9d-6a5ee2db5591": {
+            "id": "1db7c07d-874e-4779-be9d-6a5ee2db5591",
+            "name": "SleepMS",
+            "category": "action",
+            "title": "SleepMS",
+            "description": "SleepMS的单位是100ms\nsleep时间在sleepbase与sleeptop之间随机",
+            "properties": {
+              "sleepbase": 10,
+              "sleeptop": 20
+            },
+            "display": {
+              "x": 624,
+              "y": -72
+            }
           }
         },
         "display": {

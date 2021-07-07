@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/golang/glog"
+	"errors"
 )
 
 type RNetwork struct {
@@ -48,6 +49,10 @@ func (gc *RNetwork) OnClose() {
 			glog.Error("[异常] 报错 ", err, "\n", string(debug.Stack()))
 		}
 	}()
+	if nil == gc.conn {
+		glog.Infoln("[服务] 已经与网关断开连接")
+		return
+	}
 	gc.conn.Close()
 	glog.Infoln("[服务] 与网关服务器断开连接")
 }
@@ -78,10 +83,13 @@ func (gc *RNetwork) SendMsg(data []byte) error {
 			glog.Error("[异常] 报错 ", err, "\n", string(debug.Stack()))
 		}
 	}()
+	if nil == gc.conn {
+		glog.Errorln("网络已经断开连接,无法发送")
+		return errors.New("网络已经断开连接")
+	}
 	_, err := gc.conn.Write(data)
 	if err != nil {
 		glog.Errorln("网络发送失败的原因为", err.Error())
-		time.Sleep(time.Second)
 		return err
 	}
 	return nil

@@ -1,7 +1,6 @@
 package robot
 
 import (
-	"fmt"
 	"math/rand"
 	"robotgo/src/tools"
 	"strconv"
@@ -65,7 +64,7 @@ func getRandStr(index uint32, lenght int) string {
 func (rbt *Robot) RunAITree() {
 	projectConfig, ok := LoadRawProjectCfg(tools.EnvGet("robot", "tree_file"))
 	if !ok {
-		fmt.Println("LoadRawProjectCfg err")
+		glog.Infoln("LoadRawProjectCfg err")
 		return
 	}
 
@@ -87,7 +86,11 @@ func (rbt *Robot) RunAITree() {
 	board := RegisterBlackBoard()
 	board.SetMem("robot", rbt)
 	//循环每一帧
-	for i := 0; i < 30000000; i++ {
+	cycle_num, err := strconv.Atoi(tools.EnvGet("robot", "cycle_num"))
+	if nil != err{
+		glog.Infoln("解析配置参数 cycle_num 失败.")
+	}
+	for i := 0; i < cycle_num; i++ {
 		firstTree.Tick(i, board)
 		time.Sleep(time.Millisecond * 100)
 	}

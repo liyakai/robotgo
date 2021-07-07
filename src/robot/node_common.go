@@ -1,10 +1,13 @@
 package robot
 
 import (
+	"encoding/binary"
 	"math/rand"
 	"robotgo/src/tools"
 	"strconv"
 	"time"
+
+	"bytes"
 
 	"github.com/golang/glog"
 	b3 "github.com/liyakai/behavior3go"
@@ -44,6 +47,7 @@ func (this *SleepMS) Initialize(setting *BTNodeCfg) {
 }
 
 func (this *SleepMS) OnTick(tick *Tick) b3.Status {
+	glog.Infoln("执行 Sleep 节点")
 	intsleepms := rand.Intn(this.sleeptop) + this.sleepbase
 	glog.Infoln("休眠:", tick.GetLastSubTree(), strconv.Itoa(intsleepms*100), "ms")
 	time.Sleep(100 * time.Millisecond * time.Duration(intsleepms))
@@ -95,7 +99,7 @@ func (this *DisConnectServer) OnTick(tick *Tick) b3.Status {
 	tick.Blackboard.SetMem("is_online", false)       // 设置为不在线
 	tick.Blackboard.SetMem("is_connect_gate", false) // 设置为断开连接
 	glog.Infoln("设置TCP连接状态为:", tick.Blackboard.GetMem("is_online").(bool))
-	return b3.FAILURE
+	return b3.SUCCESS
 }
 
 // 自定义条件节点 判断是否有连接
@@ -179,20 +183,21 @@ func (this *SendBigByte) Initialize(setting *BTNodeCfg) {
 }
 
 func (this *SendBigByte) OnTick(tick *Tick) b3.Status {
-	// rbt := tick.Blackboard.GetMem("robot").(*Robot)
-	// var bblock tools.PBigByteBlock
-	// bblock.Size = tick.Blackboard.GetMem("big_byte_size").(int32)
-	// bblock.ByteBlock = make([]byte, bblock.Size)
-	// packetBin, err := bblock.GetPacketBin()
-	// if err != nil {
-	// 	glog.Infoln("生成 SendBigByte 包失败", err.Error())
-	// 	return b3.FAILURE
-	// }
-	// glog.Infoln(packetBin)
-	// sendErr := rbt.network.SendMsg(packetBin)
-	// if sendErr != nil {
-	// 	return b3.FAILURE
-	// }
+	rbt := tick.Blackboard.GetMem("robot").(*Robot)
+	block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
+	block := make([]byte, block_size)
+	for i := int32(0); i < block_size; i++ {
+		block[i] = byte(i)
+	}
+	buffer := new(bytes.Buffer)
+	binary.Write(buffer, binary.LittleEndian, uint32(block_size))
+	binary.Write(buffer, binary.LittleEndian, block)
+
+	glog.Infoln(buffer.Bytes())
+	sendErr := rbt.network.SendMsg(buffer.Bytes())
+	if sendErr != nil {
+		return b3.FAILURE
+	}
 	return b3.SUCCESS
 }
 
@@ -206,22 +211,9 @@ func (this *SendBigByteRes) Initialize(setting *BTNodeCfg) {
 }
 
 func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
-	// rbt := tick.Blackboard.GetMem("robot").(*Robot)
-	// rcv_data := rbt.network.ReceiveMsg()
-	// packets, err := tools.FindPacket("BigByteBlock", rcv_data)
-	// if err != nil {
-	// 	glog.Errorln("BigByteBlock 解包失败")
-	// 	return b3.FAILURE
-	// }
-	// for i := 0; i < len(packets); i++ {
-	// 	// 类型断言
-	// 	pkt, ok := packets[i].(*tools.PBigByteBlock)
-	// 	if !ok {
-	// 		glog.Errorln("PBigByteBlock 类型断言失败", reflect.TypeOf(packets[0]))
-	// 		return b3.FAILURE
-	// 	}
-	// 	glog.Infoln("接收数据块大小", pkt.Size)
-	// 	return b3.SUCCESS
-	// }
-	return b3.FAILURE
+	rbt := tick.Blackboard.GetMem("robot").(*Robot)
+	rcv_data := rbt.network.ReceiveMsg()
+	glog.Infoln("接收数据块大小", len(rcv_data))
+	glog.Infoln("接收数据块内容", rcv_data)
+	return b3.SUCCESS
 }
