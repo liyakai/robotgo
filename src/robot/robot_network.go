@@ -8,8 +8,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/golang/glog"
 	"errors"
+
+	"github.com/golang/glog"
 )
 
 type RNetwork struct {

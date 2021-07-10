@@ -13,7 +13,7 @@
     "tree": "TesNetwork",
     "gateaddr":"127.0.0.1:9500",
     "login_freq": "40",
-    "readtime" : "1000",
+    "readtime" : "20000",
     "big_byte_size": "32",
     "cycle_num": "2"
   }
