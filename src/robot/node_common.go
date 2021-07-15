@@ -190,10 +190,10 @@ func (this *SendBigByte) OnTick(tick *Tick) b3.Status {
 		block[i] = byte(i)
 	}
 	buffer := new(bytes.Buffer)
-	binary.Write(buffer, binary.LittleEndian, uint32(block_size))
+	binary.Write(buffer, binary.LittleEndian, uint32(block_size)+4)
 	binary.Write(buffer, binary.LittleEndian, block)
 
-	glog.Infoln(buffer.Bytes())
+	// glog.Infoln(buffer.Bytes())
 	sendErr := rbt.network.SendMsg(buffer.Bytes())
 	if sendErr != nil {
 		return b3.FAILURE
@@ -213,7 +213,9 @@ func (this *SendBigByteRes) Initialize(setting *BTNodeCfg) {
 func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	rbt := tick.Blackboard.GetMem("robot").(*Robot)
 	rcv_data := rbt.network.ReceiveMsg()
-	glog.Infoln("接收数据块大小", len(rcv_data))
-	glog.Infoln("接收数据块内容", rcv_data)
+	block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
+	if int32(len(rcv_data)) != block_size+4 {
+		glog.Infoln("接收数据块大小", len(rcv_data))
+	}
 	return b3.SUCCESS
 }

@@ -12,9 +12,9 @@
     "tree_file":"../trees/example.b3",
     "tree": "TesNetwork",
     "gateaddr":"127.0.0.1:9500",
-    "login_freq": "40",
-    "readtime" : "20000",
-    "big_byte_size": "32",
+    "login_freq": "10",
+    "readtime" : "200",
+    "big_byte_size": "16",
     "cycle_num": "2"
   }
 }
