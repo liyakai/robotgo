@@ -8,13 +8,13 @@
     "config": "./bin/"
   },
   "robot": {
-    "robot_num": "1",
+    "robot_num": "4000",
     "tree_file":"../trees/example.b3",
     "tree": "TesNetwork",
     "gateaddr":"127.0.0.1:9500",
     "login_freq": "10",
-    "readtime" : "200",
-    "big_byte_size": "16",
-    "cycle_num": "2"
+    "readtime" : "500",
+    "big_byte_size": "2048",
+    "cycle_num": "200"
   }
 }

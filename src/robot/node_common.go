@@ -193,7 +193,7 @@ func (this *SendBigByte) OnTick(tick *Tick) b3.Status {
 	binary.Write(buffer, binary.LittleEndian, uint32(block_size)+4)
 	binary.Write(buffer, binary.LittleEndian, block)
 
-	// glog.Infoln(buffer.Bytes())
+	// glog.Infoln(buffer.Bytes()[0:31])
 	sendErr := rbt.network.SendMsg(buffer.Bytes())
 	if sendErr != nil {
 		return b3.FAILURE
@@ -217,5 +217,6 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	if int32(len(rcv_data)) != block_size+4 {
 		glog.Infoln("接收数据块大小", len(rcv_data))
 	}
+	// glog.Info("收到数据:", rcv_data[0:31])
 	return b3.SUCCESS
 }
