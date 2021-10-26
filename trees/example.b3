@@ -1078,7 +1078,7 @@
             "name": "SleepMS",
             "category": "action",
             "title": "SleepMS",
-            "description": "SleepMS的单位是100ms\nsleep时间在sleepbase与sleeptop之间随机",
+            "description": "SleepMS的单位是ms\nsleep时间在sleepbase与sleeptop之间随机",
             "properties": {
               "sleepbase": 10,
               "sleeptop": 20
@@ -1147,7 +1147,7 @@
             "properties": {},
             "display": {
               "x": 1032,
-              "y": -84
+              "y": 12
             }
           },
           "86d93e32-9739-4d42-8773-689609ce1bac": {
@@ -1163,6 +1163,7 @@
             },
             "children": [
               "640eefe7-8194-4e65-8f22-5f6ebf67f631",
+              "ce0ae965-7945-482f-9ddc-0ed80ff85572",
               "d4a2e4d5-76e0-4659-80a9-f6d721f0c0cc"
             ]
           },
@@ -1201,7 +1202,7 @@
             "name": "SleepMS",
             "category": "action",
             "title": "SleepMS",
-            "description": "SleepMS的单位是100ms\nsleep时间在sleepbase与sleeptop之间随机",
+            "description": "SleepMS的单位是ms\nsleep时间在sleepbase与sleeptop之间随机",
             "properties": {
               "sleepbase": 20,
               "sleeptop": 30
@@ -1286,6 +1287,21 @@
               "y": -132
             },
             "child": "86d93e32-9739-4d42-8773-689609ce1bac"
+          },
+          "ce0ae965-7945-482f-9ddc-0ed80ff85572": {
+            "id": "ce0ae965-7945-482f-9ddc-0ed80ff85572",
+            "name": "SleepMS",
+            "category": "action",
+            "title": "SleepMS",
+            "description": "SleepMS的单位是ms\nsleep时间在sleepbase与sleeptop之间随机",
+            "properties": {
+              "sleepbase": 49,
+              "sleeptop": 51
+            },
+            "display": {
+              "x": 1032,
+              "y": -84
+            }
           }
         },
         "display": {
@@ -1364,19 +1380,6 @@
       {
         "version": "0.3.0",
         "scope": "node",
-        "name": "SleepMS",
-        "category": "action",
-        "title": "SleepMS",
-        "description": "SleepMS的单位是100ms\nsleep时间在sleepbase与sleeptop之间随机",
-        "properties": {
-          "sleepbase": 10,
-          "sleeptop": 20
-        },
-        "parent": null
-      },
-      {
-        "version": "0.3.0",
-        "scope": "node",
         "name": "RandomChooseOne",
         "category": "composite",
         "title": "RandomChooseOne",
@@ -1415,6 +1418,19 @@
         "title": "SendBigByteRes",
         "description": "SendBigByteRes",
         "properties": {},
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "SleepMS",
+        "category": "action",
+        "title": "SleepMS",
+        "description": "SleepMS的单位是ms\nsleep时间在sleepbase与sleeptop之间随机",
+        "properties": {
+          "sleepbase": 10,
+          "sleeptop": 20
+        },
         "parent": null
       }
     ],

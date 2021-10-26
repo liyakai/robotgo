@@ -30,7 +30,7 @@ func main() {
 		}
 	}()
 	robot_num, login_req := ConfigParam()
-	glog.Info("[启动] 开始机器人测试")
+	glog.Info("[启动] 开始机器人测试, 机器人总数", robot_num, "登录间隔:", login_req, "毫秒[ms]")
 
 	RobotMgrGetMe().Init(uint32(robot_num), int64(login_req))
 	glog.Info("[启动] 完成 ")

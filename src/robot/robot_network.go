@@ -2,6 +2,7 @@ package robot
 
 import (
 	"io/ioutil"
+	"io"
 	"net"
 	"robotgo/src/tools"
 	"runtime/debug"
@@ -75,6 +76,18 @@ func (gc *RNetwork) ReceiveMsg() (data []byte) {
 	}
 	// glog.Infoln("gateClient 接收到的内容是")
 	// glog.Info(data)
+	return
+}
+
+func (gc *RNetwork) ReceiveMsgWithLen(len uint32) (data []byte)  {
+	read_time, _ := strconv.Atoi(tools.EnvGet("robot", "readtime"))
+	gc.conn.SetReadDeadline(time.Now().Add(time.Millisecond * time.Duration(read_time)))
+	data,err := ioutil.ReadAll(io.LimitReader(gc.conn, int64(len)))
+	if err != nil {
+		glog.Errorln("gateClient 错误码", err.Error(), int64(len))
+		//time.Sleep(time.Millisecond * 1000)
+		return nil
+	}
 	return
 }
 

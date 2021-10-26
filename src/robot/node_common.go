@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"math/rand"
 	"robotgo/src/tools"
-	"strconv"
+	//"strconv"
 	"time"
 
 	"bytes"
@@ -47,10 +47,10 @@ func (this *SleepMS) Initialize(setting *BTNodeCfg) {
 }
 
 func (this *SleepMS) OnTick(tick *Tick) b3.Status {
-	glog.Infoln("执行 Sleep 节点")
-	intsleepms := rand.Intn(this.sleeptop) + this.sleepbase
-	glog.Infoln("休眠:", tick.GetLastSubTree(), strconv.Itoa(intsleepms*100), "ms")
-	time.Sleep(100 * time.Millisecond * time.Duration(intsleepms))
+	//glog.Infoln("执行 Sleep 节点")
+	intsleepms := rand.Intn(this.sleeptop - this.sleepbase) + this.sleepbase
+	//glog.Infoln("休眠:", tick.GetLastSubTree(), strconv.Itoa(intsleepms), "ms")
+	time.Sleep(time.Millisecond * time.Duration(intsleepms))
 	return b3.SUCCESS
 }
 
@@ -212,9 +212,15 @@ func (this *SendBigByteRes) Initialize(setting *BTNodeCfg) {
 
 func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	rbt := tick.Blackboard.GetMem("robot").(*Robot)
-	rcv_data := rbt.network.ReceiveMsg()
+	rcv_data_len := rbt.network.ReceiveMsgWithLen(4)
+	if(4 != len(rcv_data_len)){
+		glog.Infoln("接收数据块头部大小1: ", len(rcv_data_len))
+		return b3.FAILURE
+	}
+	data_len := binary.LittleEndian.Uint32(rcv_data_len) - 4
+	rcv_data := rbt.network.ReceiveMsgWithLen(data_len)
 	block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
-	if int32(len(rcv_data)) != block_size+4 {
+	if int32(len(rcv_data)) != block_size {
 		glog.Infoln("接收数据块大小", len(rcv_data))
 	}
 	// glog.Info("收到数据:", rcv_data[0:31])
