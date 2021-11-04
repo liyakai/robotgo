@@ -34,7 +34,8 @@ func (gc *RNetwork) SetOwner(owner *Robot) {
 }
 
 func (gc *RNetwork) connect(address string) bool {
-	conn, err := net.Dial("tcp", address)
+	network := tools.EnvGet("robot", "network");
+	conn, err := net.Dial(network, address)
 	if err != nil {
 		glog.Errorln("连接网关失败.", address)
 		return false

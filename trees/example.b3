@@ -1280,7 +1280,7 @@
             "title": "Repeat <maxLoop>x",
             "description": "",
             "properties": {
-              "maxLoop": 1000
+              "maxLoop": 100000
             },
             "display": {
               "x": 624,
