@@ -1,0 +1,21 @@
+{
+  "global": {
+    "loglevel": "2",
+    "logstrlevel": "INFO",
+    "logtostderr": "false",
+    "alsologtostderr": "true",
+    "logdir": "log",
+    "config": "./bin/"
+  },
+  "robot": {
+    "robot_num": "1000",
+    "tree_file":"../trees/example.b3",
+    "tree": "TesNetwork",
+    "network": "udp",
+    "gateaddr":"127.0.0.1:9700",
+    "login_freq": "1",
+    "readtime" : "1000",
+    "big_byte_size": "128",
+    "cycle_num": "200000"
+  }
+}
