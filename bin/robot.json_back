@@ -2,15 +2,20 @@
   "global": {
     "loglevel": "2",
     "logstrlevel": "INFO",
-    "logtostderr": "true",
+    "logtostderr": "false",
     "alsologtostderr": "true",
+    "logdir": "log",
     "config": "./bin/"
   },
   "robot": {
-    "maxNum": "10",
-    "tree": "TestLibrary",
-    "gateaddr":"127.0.0.1:9500",
-    "freq": "40",
-    "readtime" : "1000"
+    "robot_num": "1000",
+    "tree_file":"../trees/example.b3",
+    "tree": "TesNetwork",
+    "network": "udp",   // tcp, udp, kcp
+    "gateaddr":"127.0.0.1:9700",
+    "login_freq": "1",
+    "readtime" : "1000",
+    "big_byte_size": "128",
+    "cycle_num": "200000"
   }
 }

@@ -4,6 +4,7 @@ import (
 	"encoding/binary"
 	"math/rand"
 	"robotgo/src/tools"
+
 	//"strconv"
 	"time"
 
@@ -48,7 +49,7 @@ func (this *SleepMS) Initialize(setting *BTNodeCfg) {
 
 func (this *SleepMS) OnTick(tick *Tick) b3.Status {
 	//glog.Infoln("执行 Sleep 节点")
-	intsleepms := rand.Intn(this.sleeptop - this.sleepbase) + this.sleepbase
+	intsleepms := rand.Intn(this.sleeptop-this.sleepbase) + this.sleepbase
 	//glog.Infoln("休眠:", tick.GetLastSubTree(), strconv.Itoa(intsleepms), "ms")
 	time.Sleep(time.Millisecond * time.Duration(intsleepms))
 	return b3.SUCCESS
@@ -184,6 +185,7 @@ func (this *SendBigByte) Initialize(setting *BTNodeCfg) {
 
 func (this *SendBigByte) OnTick(tick *Tick) b3.Status {
 	rbt := tick.Blackboard.GetMem("robot").(*Robot)
+	network := tools.EnvGet("robot", "network")
 	block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
 	block := make([]byte, block_size)
 	for i := int32(0); i < block_size; i++ {
@@ -194,7 +196,13 @@ func (this *SendBigByte) OnTick(tick *Tick) b3.Status {
 	binary.Write(buffer, binary.LittleEndian, block)
 
 	// glog.Infoln(buffer.Bytes()[0:31])
-	sendErr := rbt.network.SendMsg(buffer.Bytes())
+	var sendErr error
+	if network == "tcp" || network == "udp" {
+		sendErr = rbt.network.SendMsg(buffer.Bytes())
+	} else if network == "kcp" {
+		sendErr = rbt.network.SendKcpMsg(buffer.Bytes())
+	}
+
 	if sendErr != nil {
 		return b3.FAILURE
 	}
@@ -216,22 +224,25 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	network := tools.EnvGet("robot", "network")
 	var rcv_len int32
 	var rcv_data []byte
-	if network == "tcp"{
+	if network == "tcp" {
 		rcv_data_len := rbt.network.ReceiveMsgWithLen(4)
-		if(4 != len(rcv_data_len)){
+		if 4 != len(rcv_data_len) {
 			glog.Infoln("接收数据块头部大小1: ", len(rcv_data_len))
 			return b3.FAILURE
 		}
 		data_len := binary.LittleEndian.Uint32(rcv_data_len) - 4
 		rcv_data = rbt.network.ReceiveMsgWithLen(data_len)
-		rcv_len = int32(len(rcv_data)) 
-	} else if network == "udp"{
+		rcv_len = int32(len(rcv_data))
+	} else if network == "udp" {
 		rcv_data = rbt.network.ReceiveMsg()
+		rcv_len = int32(len(rcv_data)) - 4
+	} else if network == "kcp" {
+		rcv_data = rbt.network.ReceiveKcpMsg()
 		rcv_len = int32(len(rcv_data)) - 4
 	}
 	if rcv_len != block_size {
 		glog.Infoln("接收数据块大小", len(rcv_data))
-		glog.Infoln("接收数据块内容:",rcv_data)
+		glog.Infoln("接收数据块内容:", rcv_data)
 	}
 
 	// glog.Info("收到数据:", rcv_data[0:31])

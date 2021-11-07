@@ -8,10 +8,10 @@
     "config": "./bin/"
   },
   "robot": {
-    "robot_num": "1000",
+    "robot_num": "1",
     "tree_file":"../trees/example.b3",
     "tree": "TesNetwork",
-    "network": "udp",
+    "network": "kcp",
     "gateaddr":"127.0.0.1:9700",
     "login_freq": "1",
     "readtime" : "1000",
