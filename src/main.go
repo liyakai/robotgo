@@ -83,7 +83,7 @@ func ConfigParam() (int, int) {
 	// 机器人数量
 	robot_num, err := strconv.Atoi(tools.EnvGet("robot", "robot_num"))
 	if err != nil {
-		glog.Errorln("[启动] 请检查配置config.json. 是否有robot robot_num 项")
+		glog.Errorln("[启动] 请检查配置 robot.json. 是否有robot robot_num 项")
 		return 0, 0
 	}
 	if *robotNum != 1 {
@@ -94,7 +94,7 @@ func ConfigParam() (int, int) {
 	// 机器人登录频率
 	login_freq, err := strconv.Atoi(tools.EnvGet("robot", "login_freq"))
 	if err != nil {
-		glog.Errorln("[启动] 请检查配置config.json. 是否有robot login_freq 项")
+		glog.Errorln("[启动] 请检查配置 robot.json. 是否有robot login_freq 项")
 		return 0, 0
 	}
 	if *loginFreq != 10 {

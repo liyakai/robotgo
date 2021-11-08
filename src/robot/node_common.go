@@ -240,9 +240,10 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 		rcv_data = rbt.network.ReceiveKcpMsg()
 		rcv_len = int32(len(rcv_data)) - 4
 	}
+	//glog.Infoln("接收数据块通道类型", network)
 	if rcv_len != block_size {
 		glog.Infoln("接收数据块大小", len(rcv_data))
-		glog.Infoln("接收数据块内容:", rcv_data)
+		glog.Infoln("接收数据块内容:", rcv_data[0:32])
 	}
 
 	// glog.Info("收到数据:", rcv_data[0:31])

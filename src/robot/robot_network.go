@@ -127,14 +127,15 @@ func (gc *RNetwork) ReceiveKcpMsg() (data []byte) {
 	// glog.Infoln("gateClient 接收到的内容是")
 	// glog.Info(data)
 	glog.Info("成功读取消息 ReadAll", data[0:32])
-	kcp_recv_len := gc.kcpconn.Input(data, true, true)
-	glog.Info("成功读取消息 Input", data[0:32])
 	gc.KcpUpdate()
-	if kcp_recv_len > 0 {
+	kcp_recv_len := gc.kcpconn.Input(data, true, true)
+	glog.Info("成功读取消息 Input ret:", kcp_recv_len, data[0:32])
+	gc.KcpUpdate()
+	if kcp_recv_len >= 0 {
 		kcp_recv_len = gc.kcpconn.Recv(data)
 		glog.Info("成功读取消息 Recv", data[0:32])
 		gc.KcpUpdate()
-		if kcp_recv_len > 0 {
+		if kcp_recv_len >= 0 {
 			glog.Info("成功读取消息", data[0:32])
 		}
 	}
@@ -170,7 +171,7 @@ func (gc *RNetwork) SendKcpMsg(data []byte) error {
 		glog.Errorln("网络已经断开连接,无法发送")
 		return errors.New("网络已经断开连接")
 	}
-	glog.Info("kcp 封装前发送数据长度:", len(data))
+	//glog.Info("kcp 封装前发送数据长度:", len(data))
 	gc.kcpconn.Send(data)
 	gc.KcpUpdate()
 	return nil

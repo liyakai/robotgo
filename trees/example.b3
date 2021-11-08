@@ -1163,7 +1163,7 @@
             },
             "children": [
               "640eefe7-8194-4e65-8f22-5f6ebf67f631",
-              "ce0ae965-7945-482f-9ddc-0ed80ff85572",
+              "43c5d4f7-8c4b-47ef-ac2d-d88c37e35596",
               "d4a2e4d5-76e0-4659-80a9-f6d721f0c0cc"
             ]
           },
@@ -1288,15 +1288,14 @@
             },
             "child": "86d93e32-9739-4d42-8773-689609ce1bac"
           },
-          "ce0ae965-7945-482f-9ddc-0ed80ff85572": {
-            "id": "ce0ae965-7945-482f-9ddc-0ed80ff85572",
-            "name": "SleepMS",
+          "43c5d4f7-8c4b-47ef-ac2d-d88c37e35596": {
+            "id": "43c5d4f7-8c4b-47ef-ac2d-d88c37e35596",
+            "name": "Wait",
             "category": "action",
-            "title": "SleepMS",
-            "description": "SleepMS的单位是ms\nsleep时间在sleepbase与sleeptop之间随机",
+            "title": "Wait <milliseconds>ms",
+            "description": "",
             "properties": {
-              "sleepbase": 49,
-              "sleeptop": 51
+              "milliseconds": 5000
             },
             "display": {
               "x": 1032,
@@ -1436,5 +1435,5 @@
     ],
     "custom_folders": []
   },
-  "path": "E:\\workSpace\\github\\robotgo\\trees\\example.b3"
+  "path": "C:\\Users\\yakai.li.7road\\Documents\\workspace\\example.b3"
 }
