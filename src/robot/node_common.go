@@ -195,7 +195,7 @@ func (this *SendBigByte) OnTick(tick *Tick) b3.Status {
 	binary.Write(buffer, binary.LittleEndian, uint32(block_size)+4)
 	binary.Write(buffer, binary.LittleEndian, block)
 
-	// glog.Infoln(buffer.Bytes()[0:31])
+	glog.Infoln("发送数据块:", buffer.Bytes()[0:31])
 	var sendErr error
 	if network == "tcp" || network == "udp" {
 		sendErr = rbt.network.SendMsg(buffer.Bytes())
@@ -227,12 +227,14 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	if network == "tcp" {
 		rcv_data_len := rbt.network.ReceiveMsgWithLen(4)
 		if 4 != len(rcv_data_len) {
-			glog.Infoln("接收数据块头部大小1: ", len(rcv_data_len))
+			glog.Infoln("接收数据块头部大小: ", len(rcv_data_len))
 			return b3.FAILURE
 		}
+		glog.Infoln("接收数据块头部大小: ", len(rcv_data_len))
 		data_len := binary.LittleEndian.Uint32(rcv_data_len) - 4
 		rcv_data = rbt.network.ReceiveMsgWithLen(data_len)
 		rcv_len = int32(len(rcv_data))
+		glog.Infoln("接收数据块body大小: ", rcv_len)
 	} else if network == "udp" {
 		rcv_data = rbt.network.ReceiveMsg()
 		rcv_len = int32(len(rcv_data)) - 4
