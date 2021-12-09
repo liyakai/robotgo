@@ -220,7 +220,7 @@ func (this *SendBigByteRes) Initialize(setting *BTNodeCfg) {
 
 func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	rbt := tick.Blackboard.GetMem("robot").(*Robot)
-	block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
+	//block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
 	network := tools.EnvGet("robot", "network")
 	var rcv_len int32
 	var rcv_data []byte
@@ -239,14 +239,15 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 		rcv_data = rbt.network.ReceiveMsg()
 		rcv_len = int32(len(rcv_data)) - 4
 	} else if network == "kcp" {
-		rcv_data = rbt.network.ReceiveKcpMsg()
-		rcv_len = int32(len(rcv_data)) - 4
+		rcv_data, rcv_len = rbt.network.ReceiveKcpMsg()
+		rcv_len = rcv_len - 4
 	}
-	//glog.Infoln("接收数据块通道类型", network)
-	if rcv_len != block_size {
-		glog.Infoln("接收数据块大小", len(rcv_data))
-		glog.Infoln("接收数据块内容:", rcv_data[0:32])
-	}
+	glog.Infoln("接收数据块大小", rcv_len)
+	glog.Infoln("接收数据块内容:", rcv_data[0:32])
+	// if rcv_len != block_size {
+	// 	glog.Infoln("接收数据块大小", len(rcv_data))
+	// 	glog.Infoln("接收数据块内容:", rcv_data[0:32])
+	// }
 
 	// glog.Info("收到数据:", rcv_data[0:31])
 	return b3.SUCCESS

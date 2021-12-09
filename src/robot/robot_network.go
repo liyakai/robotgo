@@ -40,8 +40,8 @@ func (gc *RNetwork) connect(address string) bool {
 	network := tools.EnvGet("robot", "network")
 	if network == "kcp" {
 		kcpconn := kcp.NewKCP(0x01020304, func(buf []byte, size int) {
-			glog.Info("kcp 封装后发送数据长度:", len(buf), "<--> size:", size)
-			glog.Info("kcp 发送封装后的数据:", buf[0:32])
+			//glog.Info("kcp 封装后发送数据长度:", len(buf), "<--> size:", size)
+			//glog.Info("kcp 发送封装后的数据:", buf[0:32])
 			gc.conn.Write(buf[0:size])
 		}) // 			 gc.KcpDialWithOptions(address, 10, 3)
 		// kcpconn.kcp.conv = 0x01020304
@@ -115,7 +115,7 @@ func (gc *RNetwork) ReceiveMsgWithLen(len uint32) (data []byte) {
 	return
 }
 
-func (gc *RNetwork) ReceiveKcpMsg() (data []byte) {
+func (gc *RNetwork) ReceiveKcpMsg() (data []byte, data_len int32) {
 	//glog.Infoln("RNetwork 开始接收消息")
 	read_time, _ := strconv.Atoi(tools.EnvGet("robot", "readtime"))
 	gc.conn.SetReadDeadline(time.Now().Add(time.Millisecond * time.Duration(read_time)))
@@ -126,18 +126,18 @@ func (gc *RNetwork) ReceiveKcpMsg() (data []byte) {
 	}
 	// glog.Infoln("gateClient 接收到的内容是")
 	// glog.Info(data)
-	glog.Info("成功读取消息 ReadAll", data[0:32])
+	//glog.Info("成功读取消息 ReadAll", data[0:32])
 	gc.KcpUpdate()
 	kcp_recv_len := gc.kcpconn.Input(data, true, true)
-	glog.Info("成功读取消息 Input ret:", kcp_recv_len, data[0:32])
+	//glog.Info("成功读取消息 Input ret:", kcp_recv_len, data[0:32])
 	gc.KcpUpdate()
 	if kcp_recv_len >= 0 {
-		kcp_recv_len = gc.kcpconn.Recv(data)
-		glog.Info("成功读取消息 Recv", data[0:32])
+		data_len = int32(gc.kcpconn.Recv(data))
+		// glog.Info("成功读取消息 Recv,len:", data_len, " data:", data[0:32])
 		gc.KcpUpdate()
-		if kcp_recv_len >= 0 {
-			glog.Info("成功读取消息", data[0:32])
-		}
+		// if kcp_recv_len >= 0 {
+		// 	glog.Info("成功读取消息", data[0:32])
+		// }
 	}
 	gc.KcpUpdate()
 	return

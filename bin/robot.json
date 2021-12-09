@@ -8,11 +8,11 @@
     "config": "./bin/"
   },
   "robot": {
-    "robot_num": "1",
+    "robot_num": "2",
     "tree_file":"../trees/example.b3",
     "tree": "TesNetwork",
     "network": "kcp",
-    "gateaddr":"127.0.0.1:9700",
+    "gateaddr":"127.0.0.1:9500",
     "login_freq": "1",
     "readtime" : "1000",
     "big_byte_size": "128",
