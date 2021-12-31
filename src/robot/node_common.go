@@ -4,6 +4,7 @@ import (
 	"encoding/binary"
 	"math/rand"
 	"robotgo/src/tools"
+	"strconv"
 
 	//"strconv"
 	"time"
@@ -195,7 +196,7 @@ func (this *SendBigByte) OnTick(tick *Tick) b3.Status {
 	binary.Write(buffer, binary.LittleEndian, uint32(block_size)+4)
 	binary.Write(buffer, binary.LittleEndian, block)
 
-	glog.Infoln("发送数据块:", buffer.Bytes()[0:31])
+	// glog.Infoln("\n\n发送数据块:", buffer.Bytes()[0:31])
 	var sendErr error
 	if network == "tcp" || network == "udp" {
 		sendErr = rbt.network.SendMsg(buffer.Bytes())
@@ -220,7 +221,7 @@ func (this *SendBigByteRes) Initialize(setting *BTNodeCfg) {
 
 func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	rbt := tick.Blackboard.GetMem("robot").(*Robot)
-	//block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
+	block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
 	network := tools.EnvGet("robot", "network")
 	var rcv_len int32
 	var rcv_data []byte
@@ -230,11 +231,14 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 			glog.Infoln("接收数据块头部大小: ", len(rcv_data_len))
 			return b3.FAILURE
 		}
-		glog.Infoln("接收数据块头部大小: ", len(rcv_data_len))
+		//glog.Infoln("接收数据块头部大小: ", len(rcv_data_len))
 		data_len := binary.LittleEndian.Uint32(rcv_data_len) - 4
 		rcv_data = rbt.network.ReceiveMsgWithLen(data_len)
 		rcv_len = int32(len(rcv_data))
-		glog.Infoln("接收数据块body大小: ", rcv_len)
+		read_time, _ := strconv.Atoi(tools.EnvGet("robot", "readtime"))
+		// 模拟read超时时间,跟udp,kcp对齐,
+		time.Sleep(time.Millisecond * time.Duration(read_time))
+		//glog.Infoln("接收数据块body大小: ", rcv_len)
 	} else if network == "udp" {
 		rcv_data = rbt.network.ReceiveMsg()
 		rcv_len = int32(len(rcv_data)) - 4
@@ -242,12 +246,14 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 		rcv_data, rcv_len = rbt.network.ReceiveKcpMsg()
 		rcv_len = rcv_len - 4
 	}
-	glog.Infoln("接收数据块大小", rcv_len)
-	glog.Infoln("接收数据块内容:", rcv_data[0:32])
-	// if rcv_len != block_size {
-	// 	glog.Infoln("接收数据块大小", len(rcv_data))
-	// 	glog.Infoln("接收数据块内容:", rcv_data[0:32])
-	// }
+	// glog.Infoln("接收数据块大小", rcv_len)
+	// glog.Infoln("接收数据块内容:", rcv_data[0:32])
+	if rcv_len != block_size {
+		glog.Infoln("接收数据块大小", len(rcv_data))
+		if rcv_len >= 32 {
+			glog.Infoln("接收数据块内容:", rcv_data[0:32])
+		}
+	}
 
 	// glog.Info("收到数据:", rcv_data[0:31])
 	return b3.SUCCESS
