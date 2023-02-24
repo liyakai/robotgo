@@ -17,7 +17,7 @@ import (
 	. "github.com/liyakai/behavior3go/core"
 )
 
-//自定义action节点
+// 自定义action节点
 type NodeLog struct {
 	Action
 	info string
@@ -198,8 +198,10 @@ func (this *SendBigByte) OnTick(tick *Tick) b3.Status {
 
 	// glog.Infoln("\n\n发送数据块:", buffer.Bytes()[0:31])
 	var sendErr error
-	if network == "tcp" || network == "udp" {
+	if network == "tcp" {
 		sendErr = rbt.network.SendMsg(buffer.Bytes())
+	} else if network == "udp" {
+		sendErr = rbt.network.SendUdpMsg(buffer.Bytes())
 	} else if network == "kcp" {
 		sendErr = rbt.network.SendKcpMsg(buffer.Bytes())
 	}
@@ -240,8 +242,9 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 		time.Sleep(time.Millisecond * time.Duration(read_time))
 		//glog.Infoln("接收数据块body大小: ", rcv_len)
 	} else if network == "udp" {
-		rcv_data = rbt.network.ReceiveMsg()
-		rcv_len = int32(len(rcv_data)) - 4
+		var n int
+		rcv_data, n = rbt.network.ReceiveMsgFromUdp()
+		rcv_len = int32(n) - 4
 	} else if network == "kcp" {
 		rcv_data, rcv_len = rbt.network.ReceiveKcpMsg()
 		rcv_len = rcv_len - 4
@@ -249,6 +252,7 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	// glog.Infoln("接收数据块大小", rcv_len)
 	// glog.Infoln("接收数据块内容:", rcv_data[0:32])
 	if rcv_len != block_size {
+		glog.Infoln("接收数据块大小 :", rcv_len, " block_size:", block_size)
 		glog.Infoln("接收数据块大小", len(rcv_data))
 		if rcv_len >= 32 {
 			glog.Infoln("接收数据块内容:", rcv_data[0:32])

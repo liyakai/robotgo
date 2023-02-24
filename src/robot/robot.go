@@ -87,7 +87,7 @@ func (rbt *Robot) RunAITree() {
 	board.SetMem("robot", rbt)
 	//循环每一帧
 	cycle_num, err := strconv.Atoi(tools.EnvGet("robot", "cycle_num"))
-	if nil != err{
+	if nil != err {
 		glog.Infoln("解析配置参数 cycle_num 失败.")
 	}
 	for i := 0; i < cycle_num; i++ {
