@@ -132,24 +132,26 @@ func (gc *RNetwork) ReceiveMsg() (data []byte) {
 		glog.Errorln("gateClient 接收出错:", err.Error())
 		glog.Errorln("gateClient 接收出错:", data)
 	}
-	// glog.Infoln("gateClient 接收到的内容是")
+	// glog.Infoln("gateClient ReceiveMsg 接收到的内容是")
 	// glog.Info(data)
 	return
 }
 
-func (gc *RNetwork) ReceiveMsgWithLen(len uint32) (data []byte) {
-	read_time, _ := strconv.Atoi(tools.EnvGet("robot", "readtime"))
-	gc.conn.SetReadDeadline(time.Now().Add(time.Millisecond * time.Duration(read_time)))
-	data, err := ioutil.ReadAll(io.LimitReader(gc.conn, int64(len)))
+func (gc *RNetwork) ReceiveMsgWithLen(len int) (data []byte, n int) {
+	// read_time, _ := strconv.Atoi(tools.EnvGet("robot", "readtime"))
+	// gc.conn.SetReadDeadline(time.Now().Add(time.Millisecond * time.Duration(read_time)))
+	// data, err := ioutil.ReadAll(io.LimitReader(gc.conn, int64(len)))
+	data = make([]byte, len)
+	n, err := io.ReadFull(gc.conn, data)
 	if err != nil {
 		glog.Errorln("gateClient 错误码", err.Error(), int64(len))
 		//time.Sleep(time.Millisecond * 1000)
-		return nil
+		return nil, 0
 	}
 	return
 }
 
-func (gc *RNetwork) ReceiveKcpMsg() (data []byte, data_len int32) {
+func (gc *RNetwork) ReceiveKcpMsg() (data []byte, data_len int) {
 	//glog.Infoln("RNetwork 开始接收消息")
 	read_time, _ := strconv.Atoi(tools.EnvGet("robot", "readtime"))
 	gc.conn.SetReadDeadline(time.Now().Add(time.Millisecond * time.Duration(read_time)))
@@ -166,7 +168,7 @@ func (gc *RNetwork) ReceiveKcpMsg() (data []byte, data_len int32) {
 	//glog.Info("成功读取消息 Input ret:", kcp_recv_len, data[0:32])
 	gc.KcpUpdate()
 	if kcp_recv_len >= 0 {
-		data_len = int32(gc.kcpconn.Recv(data))
+		data_len = int(gc.kcpconn.Recv(data))
 		// glog.Info("成功读取消息 Recv,len:", data_len, " data:", data[0:32])
 		gc.KcpUpdate()
 		// if kcp_recv_len >= 0 {

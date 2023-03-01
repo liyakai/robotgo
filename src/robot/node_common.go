@@ -223,28 +223,31 @@ func (this *SendBigByteRes) Initialize(setting *BTNodeCfg) {
 
 func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	rbt := tick.Blackboard.GetMem("robot").(*Robot)
-	block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
+
+	// readtime 时间后再Read
+	read_time, _ := strconv.Atoi(tools.EnvGet("robot", "readtime"))
+	if read_time > 0 {
+		time.Sleep(time.Millisecond * time.Duration(read_time))
+	}
+
+	block_size := int(tick.Blackboard.GetMem("big_byte_size").(int32))
 	network := tools.EnvGet("robot", "network")
-	var rcv_len int32
+	var rcv_len int
 	var rcv_data []byte
 	if network == "tcp" {
-		rcv_data_len := rbt.network.ReceiveMsgWithLen(4)
-		if 4 != len(rcv_data_len) {
-			glog.Infoln("接收数据块头部大小: ", len(rcv_data_len))
+		rcv_data_len_data, rcv_data_len := rbt.network.ReceiveMsgWithLen(4)
+		if 4 != rcv_data_len {
+			glog.Infoln("接收数据块头部大小: ", rcv_data_len)
 			return b3.FAILURE
 		}
 		//glog.Infoln("接收数据块头部大小: ", len(rcv_data_len))
-		data_len := binary.LittleEndian.Uint32(rcv_data_len) - 4
-		rcv_data = rbt.network.ReceiveMsgWithLen(data_len)
-		rcv_len = int32(len(rcv_data))
-		read_time, _ := strconv.Atoi(tools.EnvGet("robot", "readtime"))
-		// 模拟read超时时间,跟udp,kcp对齐,
-		time.Sleep(time.Millisecond * time.Duration(read_time))
+		data_len := binary.LittleEndian.Uint32(rcv_data_len_data) - 4
+		rcv_data, rcv_len = rbt.network.ReceiveMsgWithLen((int)(data_len))
 		//glog.Infoln("接收数据块body大小: ", rcv_len)
 	} else if network == "udp" {
 		var n int
 		rcv_data, n = rbt.network.ReceiveMsgFromUdp()
-		rcv_len = int32(n) - 4
+		rcv_len = int(n) - 4
 	} else if network == "kcp" {
 		rcv_data, rcv_len = rbt.network.ReceiveKcpMsg()
 		rcv_len = rcv_len - 4
