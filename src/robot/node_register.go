@@ -30,5 +30,7 @@ func RegisterNodes() *b3.RegisterStructMaps {
 	maps.Register("RandomExe", new(RandomExe))
 	maps.Register("SendBigByte", new(SendBigByte))
 	maps.Register("SendBigByteRes", new(SendBigByteRes))
+	maps.Register("SendProtocolBytesReq", new(SendProtocolBytesReq))
+	maps.Register("SendProtocolBytesRet", new(SendProtocolBytesRet))
 	return maps
 }

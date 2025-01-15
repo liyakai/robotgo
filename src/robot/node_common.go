@@ -265,3 +265,96 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	// glog.Info("收到数据:", rcv_data[0:31])
 	return b3.SUCCESS
 }
+
+
+
+// 发送 SendProtocolBytes
+type SendProtocolBytesReq struct {
+	Action
+}
+
+func (this *SendProtocolBytesReq) Initialize(setting *BTNodeCfg) {
+	this.Action.Initialize(setting)
+}
+
+func (this *SendProtocolBytesReq) OnTick(tick *Tick) b3.Status {
+	rbt := tick.Blackboard.GetMem("robot").(*Robot)
+	network := tools.EnvGet("robot", "network")
+	block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
+	block := make([]byte, block_size)
+	for i := int32(0); i < block_size; i++ {
+		block[i] = byte(i)
+	}
+	buffer := new(bytes.Buffer)
+	binary.Write(buffer, binary.LittleEndian, uint32(block_size)+4)
+	binary.Write(buffer, binary.LittleEndian, block)
+
+	// glog.Infoln("\n\n发送数据块:", buffer.Bytes()[0:31])
+	var sendErr error
+	if network == "tcp" {
+		sendErr = rbt.network.SendMsg(buffer.Bytes())
+	} else if network == "udp" {
+		sendErr = rbt.network.SendUdpMsg(buffer.Bytes())
+	} else if network == "kcp" {
+		sendErr = rbt.network.SendKcpMsg(buffer.Bytes())
+	}
+
+	if sendErr != nil {
+		return b3.FAILURE
+	}
+	return b3.SUCCESS
+}
+
+// 接收 SendProtocolBytes 返回的消息
+type SendProtocolBytesRet struct {
+	Action
+}
+
+func (this *SendProtocolBytesRet) Initialize(setting *BTNodeCfg) {
+	this.Action.Initialize(setting)
+}
+
+func (this *SendProtocolBytesRet) OnTick(tick *Tick) b3.Status {
+	rbt := tick.Blackboard.GetMem("robot").(*Robot)
+
+	// readtime 时间后再Read
+	read_time, _ := strconv.Atoi(tools.EnvGet("robot", "readtime"))
+	if read_time > 0 {
+		time.Sleep(time.Millisecond * time.Duration(read_time))
+	}
+
+	block_size := int(tick.Blackboard.GetMem("big_byte_size").(int32))
+	network := tools.EnvGet("robot", "network")
+	var rcv_len int
+	var rcv_data []byte
+	if network == "tcp" {
+		rcv_data_len_data, rcv_data_len := rbt.network.ReceiveMsgWithLen(4)
+		if 4 != rcv_data_len {
+			glog.Infoln("接收数据块头部大小: ", rcv_data_len)
+			return b3.FAILURE
+		}
+		//glog.Infoln("接收数据块头部大小: ", len(rcv_data_len))
+		data_len := binary.LittleEndian.Uint32(rcv_data_len_data) - 4
+		rcv_data, rcv_len = rbt.network.ReceiveMsgWithLen((int)(data_len))
+		//glog.Infoln("接收数据块body大小: ", rcv_len)
+	} else if network == "udp" {
+		var n int
+		rcv_data, n = rbt.network.ReceiveMsgFromUdp()
+		rcv_len = int(n) - 4
+	} else if network == "kcp" {
+		rcv_data, rcv_len = rbt.network.ReceiveKcpMsg()
+		rcv_len = rcv_len - 4
+	}
+	// glog.Infoln("接收数据块大小", rcv_len)
+	// glog.Infoln("接收数据块内容:", rcv_data[0:32])
+	if rcv_len != block_size {
+		glog.Infoln("接收数据块大小 :", rcv_len, " block_size:", block_size)
+		glog.Infoln("接收数据块大小", len(rcv_data))
+		if rcv_len >= 32 {
+			glog.Infoln("接收数据块内容:", rcv_data[0:32])
+		}
+	}
+
+	// glog.Info("收到数据:", rcv_data[0:31])
+	return b3.SUCCESS
+}
