@@ -11,10 +11,13 @@ import (
 
 	"bytes"
 
+	demo "robotgo/src/proto"
+
 	"github.com/golang/glog"
 	b3 "github.com/liyakai/behavior3go"
 	. "github.com/liyakai/behavior3go/config"
 	. "github.com/liyakai/behavior3go/core"
+	"google.golang.org/protobuf/proto"
 )
 
 // 自定义action节点
@@ -266,8 +269,6 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	return b3.SUCCESS
 }
 
-
-
 // 发送 SendProtocolBytes
 type SendProtocolBytesReq struct {
 	Action
@@ -280,14 +281,37 @@ func (this *SendProtocolBytesReq) Initialize(setting *BTNodeCfg) {
 func (this *SendProtocolBytesReq) OnTick(tick *Tick) b3.Status {
 	rbt := tick.Blackboard.GetMem("robot").(*Robot)
 	network := tools.EnvGet("robot", "network")
-	block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
-	block := make([]byte, block_size)
-	for i := int32(0); i < block_size; i++ {
-		block[i] = byte(i)
+	// block_size := tick.Blackboard.GetMem("big_byte_size").(int32)
+	// block := make([]byte, block_size)
+	// for i := int32(0); i < block_size; i++ {
+	// 	block[i] = byte(i)
+	// }
+	req := &demo.GetUserRequest{
+		UserId: 955,
 	}
+	req_size := proto.Size(req)
+
 	buffer := new(bytes.Buffer)
-	binary.Write(buffer, binary.LittleEndian, uint32(block_size)+4)
-	binary.Write(buffer, binary.LittleEndian, block)
+	// binary.Write(buffer, binary.LittleEndian, uint32(block_size)+4)
+	binary.Write(buffer, binary.LittleEndian, uint32(req_size)+4+20)
+	// 写入消息头
+	binary.Write(buffer, binary.LittleEndian, uint8(0xde))      // magic
+	binary.Write(buffer, binary.LittleEndian, uint8(0x01))      // version
+	binary.Write(buffer, binary.LittleEndian, uint8(0x01))      // serialize_type
+	binary.Write(buffer, binary.LittleEndian, uint8(0x01))      // msg_type
+	binary.Write(buffer, binary.LittleEndian, uint32(9527))        // seq_num
+	binary.Write(buffer, binary.LittleEndian, uint32(3417382616))        // func_id
+	binary.Write(buffer, binary.LittleEndian, uint32(req_size)) // length
+	binary.Write(buffer, binary.LittleEndian, uint32(0))        // attach_length
+	// binary.Write(buffer, binary.LittleEndian, block)
+	// 写入请求消息
+
+	reqData, err := proto.Marshal(req)
+	if err != nil {
+		glog.Errorln("序列化请求消息失败:", err)
+		return b3.FAILURE
+	}
+	binary.Write(buffer, binary.LittleEndian, reqData)
 
 	// glog.Infoln("\n\n发送数据块:", buffer.Bytes()[0:31])
 	var sendErr error

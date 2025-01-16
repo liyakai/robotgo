@@ -9,6 +9,7 @@ require (
 	github.com/liyakai/behavior3go v0.0.0-20210627151029-e1d9ad895813
 	github.com/pkg/errors v0.9.1
 	github.com/xtaci/kcp-go v5.4.20+incompatible
+	google.golang.org/protobuf v1.23.0
 )
 
 require (
