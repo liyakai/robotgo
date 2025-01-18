@@ -196,7 +196,7 @@ func (this *SendBigByte) OnTick(tick *Tick) b3.Status {
 		block[i] = byte(i)
 	}
 	buffer := new(bytes.Buffer)
-	binary.Write(buffer, binary.LittleEndian, uint32(block_size)+4)
+	binary.Write(buffer, binary.LittleEndian, uint32(block_size))
 	binary.Write(buffer, binary.LittleEndian, block)
 
 	// glog.Infoln("\n\n发送数据块:", buffer.Bytes()[0:31])
@@ -244,7 +244,7 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 			return b3.FAILURE
 		}
 		//glog.Infoln("接收数据块头部大小: ", len(rcv_data_len))
-		data_len := binary.LittleEndian.Uint32(rcv_data_len_data) - 4
+		data_len := binary.LittleEndian.Uint32(rcv_data_len_data)
 		rcv_data, rcv_len = rbt.network.ReceiveMsgWithLen((int)(data_len))
 		//glog.Infoln("接收数据块body大小: ", rcv_len)
 	} else if network == "udp" {
@@ -258,10 +258,10 @@ func (this *SendBigByteRes) OnTick(tick *Tick) b3.Status {
 	// glog.Infoln("接收数据块大小", rcv_len)
 	// glog.Infoln("接收数据块内容:", rcv_data[0:32])
 	if rcv_len != block_size {
-		glog.Infoln("接收数据块大小 :", rcv_len, " block_size:", block_size)
-		glog.Infoln("接收数据块大小", len(rcv_data))
+		glog.Infoln(rbt.name, "接收数据块大小 :", rcv_len, " block_size:", block_size)
+		glog.Infoln(rbt.name, "接收数据块大小", len(rcv_data))
 		if rcv_len >= 32 {
-			glog.Infoln("接收数据块内容:", rcv_data[0:32])
+			glog.Infoln(rbt.name, "接收数据块内容:", rcv_data[0:32])
 		}
 	}
 
@@ -293,7 +293,7 @@ func (this *SendProtocolBytesReq) OnTick(tick *Tick) b3.Status {
 
 	buffer := new(bytes.Buffer)
 	// binary.Write(buffer, binary.LittleEndian, uint32(block_size)+4)
-	binary.Write(buffer, binary.LittleEndian, uint32(req_size)+4+20)
+	binary.Write(buffer, binary.LittleEndian, uint32(req_size)+20)
 	// 写入消息头
 	binary.Write(buffer, binary.LittleEndian, uint8(0xde))      // magic
 	binary.Write(buffer, binary.LittleEndian, uint8(0x01))      // version
@@ -326,6 +326,7 @@ func (this *SendProtocolBytesReq) OnTick(tick *Tick) b3.Status {
 	if sendErr != nil {
 		return b3.FAILURE
 	}
+	// glog.Infoln("robot:",rbt.name," SendProtocolBytesReq, network:", network)
 	return b3.SUCCESS
 }
 
@@ -340,25 +341,24 @@ func (this *SendProtocolBytesRet) Initialize(setting *BTNodeCfg) {
 
 func (this *SendProtocolBytesRet) OnTick(tick *Tick) b3.Status {
 	rbt := tick.Blackboard.GetMem("robot").(*Robot)
-
 	// readtime 时间后再Read
 	read_time, _ := strconv.Atoi(tools.EnvGet("robot", "readtime"))
 	if read_time > 0 {
 		time.Sleep(time.Millisecond * time.Duration(read_time))
 	}
 
-	block_size := int(tick.Blackboard.GetMem("big_byte_size").(int32))
+	// block_size := int(tick.Blackboard.GetMem("big_byte_size").(int32))
 	network := tools.EnvGet("robot", "network")
 	var rcv_len int
 	var rcv_data []byte
 	if network == "tcp" {
 		rcv_data_len_data, rcv_data_len := rbt.network.ReceiveMsgWithLen(4)
 		if 4 != rcv_data_len {
-			glog.Infoln("接收数据块头部大小: ", rcv_data_len)
+			glog.Infoln("robot:", rbt.name ," 接收数据块头部大小: ", rcv_data_len)
 			return b3.FAILURE
 		}
-		//glog.Infoln("接收数据块头部大小: ", len(rcv_data_len))
-		data_len := binary.LittleEndian.Uint32(rcv_data_len_data) - 4
+		data_len := binary.LittleEndian.Uint32(rcv_data_len_data)
+		// glog.Info("robot:", rbt.name ," 接收数据块大小: ", data_len, " 头部数据内容 %x:",rcv_data_len_data)
 		rcv_data, rcv_len = rbt.network.ReceiveMsgWithLen((int)(data_len))
 		//glog.Infoln("接收数据块body大小: ", rcv_len)
 	} else if network == "udp" {
@@ -370,15 +370,49 @@ func (this *SendProtocolBytesRet) OnTick(tick *Tick) b3.Status {
 		rcv_len = rcv_len - 4
 	}
 	// glog.Infoln("接收数据块大小", rcv_len)
-	// glog.Infoln("接收数据块内容:", rcv_data[0:32])
-	if rcv_len != block_size {
-		glog.Infoln("接收数据块大小 :", rcv_len, " block_size:", block_size)
-		glog.Infoln("接收数据块大小", len(rcv_data))
-		if rcv_len >= 32 {
-			glog.Infoln("接收数据块内容:", rcv_data[0:32])
-		}
+	// glog.Infof("接收数据块内容: %x", rcv_data)
+
+	// 解析消息头
+	if len(rcv_data) < 20 {
+		glog.Errorln("消息头长度不足20字节")
+		return b3.FAILURE
 	}
 
-	// glog.Info("收到数据:", rcv_data[0:31])
+	header := struct {
+		Magic         uint8
+		Version       uint8  
+		SerializeType uint8
+		ErrCode       uint8
+		MsgType       uint8
+		SeqNum        uint32
+		Length        uint32
+		AttachLength  uint32
+	}{}
+
+	header.Magic = rcv_data[0]
+	header.Version = rcv_data[1]
+	header.SerializeType = rcv_data[2] 
+	header.ErrCode = rcv_data[3]
+	header.MsgType = rcv_data[4]
+	header.SeqNum = binary.LittleEndian.Uint32(rcv_data[8:12])
+	header.Length = binary.LittleEndian.Uint32(rcv_data[12:16])
+	header.AttachLength = binary.LittleEndian.Uint32(rcv_data[16:20])
+
+	// glog.Infof("消息头: Magic=%d Version=%d SerializeType=%d ErrCode=%d MsgType=%d SeqNum=%d Length=%d AttachLength=%d",
+	// 	header.Magic, header.Version, header.SerializeType, header.ErrCode, header.MsgType, header.SeqNum, header.Length, header.AttachLength)
+	// 跳过消息头20字节
+	resp := &demo.GetUserResponse{}
+	err := proto.Unmarshal(rcv_data[20:20+header.Length], resp)
+	if err != nil {
+		glog.Errorln("反序列化响应消息失败:", err)
+		return b3.FAILURE
+	}
+	// 获取附件数据
+	if header.AttachLength > 0 {
+		// attachData := rcv_data[20+header.Length : 20+header.Length+header.AttachLength]
+		// glog.Infof("robot:%s, 附件数据: %s", rbt.name, attachData)
+	}
+
+	// glog.Info("robot:", rbt.name ," 收到结果:", resp)
 	return b3.SUCCESS
 }
