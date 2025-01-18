@@ -182,17 +182,20 @@ func (gc *RNetwork) ReceiveKcpMsg() (data []byte, data_len int) {
 func (gc *RNetwork) SendMsg(data []byte) error {
 	defer func() {
 		if err := recover(); err != nil {
-			glog.Error("[异常] 报错 ", err, "\n", string(debug.Stack()))
+			time.Sleep(time.Second * 2)
+			glog.Error("robot: ", gc.owner.name ," [异常] 报错 ", err, "\n", string(debug.Stack()))
 		}
 	}()
 	if nil == gc.conn {
-		glog.Errorln("网络已经断开连接,无法发送")
+		glog.Errorln("robot: ", gc.owner.name , " 网络已经断开连接,无法发送")
+		time.Sleep(time.Second * 2)
 		return errors.New("网络已经断开连接")
 	}
 	// glog.Infoln("RNetwork 开始接收消息")
 	_, err := gc.conn.Write(data)
 	if err != nil {
-		glog.Errorln("网络发送失败的原因为", err.Error())
+		glog.Errorln("robot: ", gc.owner.name ," 网络发送失败的原因为", err.Error())
+		time.Sleep(time.Second * 2)
 		return err
 	}
 	return nil
@@ -212,7 +215,7 @@ func (gc *RNetwork) SendUdpMsg(data []byte) error {
 	_, err := gc.udpconn.Write(data)
 	if err != nil {
 		glog.Errorln("udp 网络发送失败的原因为", err.Error())
-		time.Sleep(time.Millisecond * 1000)
+		time.Sleep(time.Second * 1)
 		return err
 	}
 	return nil
