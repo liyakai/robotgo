@@ -1551,7 +1551,7 @@
             "title": "Wait <milliseconds>ms",
             "description": "",
             "properties": {
-              "milliseconds": 5000
+              "milliseconds": 10
             },
             "display": {
               "x": 1032,
@@ -1735,5 +1735,5 @@
     ],
     "custom_folders": []
   },
-  "path": "E:\\workspace\\github\\behavior3editor-win32-x64_folder\\example.b3"
+  "path": "E:\\workspace\\github\\behavior3editor-win32-x64_folder\\net_proto.b3"
 }
